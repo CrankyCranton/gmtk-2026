@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	#else:
 	if is_on_wall():
 		if not just_hit_wall:
-			velocity.y = maxf(0.0, velocity.y) # Stop falling when you hit a wall.
+			velocity.y = 0.0 # Stop gravity when you hit a wall.
 			just_hit_wall = true
 
 		if Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0:
