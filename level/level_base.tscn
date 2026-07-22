@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dhf47lecqf1yc"]
+
+[ext_resource type="PackedScene" uid="uid://cna1uay0kbei2" path="res://player/player.tscn" id="1_p5upd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_p5upd"]
+sky_material = SubResource("ProceduralSkyMaterial_20pvy")
+
+[sub_resource type="Environment" id="Environment_01rkt"]
+background_mode = 2
+sky = SubResource("Sky_p5upd")
+glow_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rhbrn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kce6f"]
+noise = SubResource("FastNoiseLite_rhbrn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ec35"]
+albedo_texture = SubResource("NoiseTexture2D_kce6f")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qcud2"]
+material = SubResource("StandardMaterial3D_7ec35")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p5upd"]
+size = Vector3(10, 0.001, 10)
+
+[node name="LevelBase" type="Node3D" unique_id=1447989969]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1103661663]
+environment = SubResource("Environment_01rkt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1167872164]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1214507884]
+mesh = SubResource("PlaneMesh_qcud2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=751863622]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1006475521]
+shape = SubResource("BoxShape3D_p5upd")
+
+[node name="Player" parent="." unique_id=561281273 instance=ExtResource("1_p5upd")]
