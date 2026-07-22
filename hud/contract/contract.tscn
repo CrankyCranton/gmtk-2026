@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bwcgc283d4cqs"]
+
+[ext_resource type="Script" uid="uid://dh2b43pctbjp" path="res://hud/contract/contract.gd" id="1_ffqe1"]
+
+[node name="Contract" type="VBoxContainer" unique_id=1626114302]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ffqe1")

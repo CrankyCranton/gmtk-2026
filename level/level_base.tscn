@@ -14,20 +14,12 @@ background_mode = 2
 sky = SubResource("Sky_p5upd")
 glow_enabled = true
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rhbrn"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhbrn"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kce6f"]
-noise = SubResource("FastNoiseLite_rhbrn")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ec35"]
-albedo_texture = SubResource("NoiseTexture2D_kce6f")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_qcud2"]
-material = SubResource("StandardMaterial3D_7ec35")
-size = Vector2(10, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_p5upd"]
-size = Vector3(10, 0.001, 10)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kce6f"]
+albedo_texture = SubResource("PlaceholderTexture2D_rhbrn")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.8122524
 
 [node name="LevelBase" type="Node3D" unique_id=1447989969]
 
@@ -38,12 +30,25 @@ environment = SubResource("Environment_01rkt")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1214507884]
-mesh = SubResource("PlaneMesh_qcud2")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=751863622]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1006475521]
-shape = SubResource("BoxShape3D_p5upd")
-
 [node name="Player" parent="." unique_id=561281273 instance=ExtResource("1_p5upd")]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1423419209]
+material_override = SubResource("StandardMaterial3D_kce6f")
+use_collision = true
+collision_mask = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=102481748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -1.8999999)
+size = Vector3(9, 0.5, 12)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=306826196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -7.3999996)
+size = Vector3(1, 6, 23)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=28736899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 18.5, -13.4)
+size = Vector3(1, 37, 11)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1630788331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 18.199999, -13.4)
+size = Vector3(1, 37.600002, 11)
