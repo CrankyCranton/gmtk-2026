@@ -38,7 +38,12 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.lerp(target_vel, current_traction * delta)
 	velocity.y = y
 
-	# NOTE: It's important that this is run before the if statements below.
+	# NOTE: It's important that this is run before the if statements below,
+	# because the is_on_floor() check will restore an extra jump immediatly after
+	# if the player jumped from the floor.
+	# Kind of a hack solution, so might need cleaning later.
+	# But it makes it so that you won't get an extra mid-air jump if you fall off
+	# a platform without jumping.
 	if Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and not is_on_wall():
 		velocity.y = jump_force
 		air_jumps_left -= 1
@@ -48,7 +53,9 @@ func _physics_process(delta: float) -> void:
 		air_jumps_left = MAX_AIR_JUMPS
 		just_hit_wall = false
 	#else:
+	var target_tilt: float = 0.0
 	if is_on_wall():
+		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
 		if not just_hit_wall:
 			velocity.y = 0.0 # Stop gravity when you hit a wall.
 			just_hit_wall = true
@@ -66,9 +73,6 @@ func _physics_process(delta: float) -> void:
 		current_gravity_scale *= wallrun_gravity_scale
 	velocity += get_gravity() * current_gravity_scale * delta
 
-	var target_tilt: float = 0.0
-	if is_on_wall():
-		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
 	# Might could switch to tweens later.
 	head.rotation.z = lerpf(head.rotation.z, target_tilt, CAM_TILT_SPEED * delta)
 
