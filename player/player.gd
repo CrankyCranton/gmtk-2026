@@ -4,6 +4,8 @@ class_name Player extends CharacterBody3D
 const MAX_TILT: float = deg_to_rad(90.0)
 const MAX_WALL_JUMPS: int = 3
 const MAX_AIR_JUMPS: int = 1
+const WALL_CAM_TILT := deg_to_rad(15.0)
+const CAM_TILT_SPEED: float = 10.0
 
 # Only restores when the player hits the floor, not wall.
 var wall_jumps_left: int = 0
@@ -40,7 +42,8 @@ func _physics_process(delta: float) -> void:
 	velocity.y = y
 
 	# NOTE: It's important that this is run before the if statements below.
-	if Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and not on_wall:
+	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0
+			and (is_on_floor() or not on_wall)):
 		velocity.y = jump_force
 		air_jumps_left -= 1
 
@@ -59,10 +62,15 @@ func _physics_process(delta: float) -> void:
 				velocity = Vector3.UP.slerp(get_wall_normal(), WALL_PUSHOFF_WEIGHT
 						) * wall_jump_force
 				wall_jumps_left -= 1
-				print("Wall jumps left: ", wall_jumps_left)
 
 		velocity += get_gravity() * current_gravity_scale * delta
 
+	var target_tilt: float = 0.0
+	# TODO: Make a way to get the normal if it's just touching wall_detector, and not the actual wall.
+	if is_on_wall():
+		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
+	# Might could switch to tweens later.
+	head.rotation.z = lerpf(head.rotation.z, target_tilt, CAM_TILT_SPEED * delta)
 
 	move_and_slide()
 	was_on_wall = on_wall
