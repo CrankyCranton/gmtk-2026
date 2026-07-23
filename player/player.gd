@@ -20,8 +20,12 @@ var speed: float = 6.0
 var wallrun_speed: float = 9.0
 var mouse_sensitivity: float = 0.004 # Should probably add a setting menu for this eventually.
 var just_hit_wall := false
+var grapple_speed: float = 20.0
+var grapple_point := Vector3.INF # INF means not grappling
 
 @onready var head: Marker3D = $Head
+@onready var cursor: RayCast3D = %Cursor
+@onready var rope_origin: Marker3D = %RopeOrigin
 
 
 func _ready() -> void:
@@ -76,6 +80,10 @@ func _physics_process(delta: float) -> void:
 	# Might could switch to tweens later.
 	head.rotation.z = lerpf(head.rotation.z, target_tilt, CAM_TILT_SPEED * delta)
 
+	if grapple_point != Vector3.INF:
+		velocity += global_position.direction_to(grapple_point) * grapple_speed * delta
+		rope_origin.look_at(grapple_point)
+		rope_origin.scale.z = rope_origin.global_position.distance_to(grapple_point)
 	move_and_slide()
 
 
@@ -85,3 +93,10 @@ func _input(event: InputEvent) -> void:
 		head.rotation.x -= mouse_vel.y
 		head.rotation.x = clampf(head.rotation.x, -MAX_TILT, MAX_TILT)
 		rotation.y -= mouse_vel.x
+
+	if event.is_action_pressed(&"grappling_hook") and cursor.is_colliding():
+		grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
+				else cursor.to_global(cursor.target_position))
+	if event.is_action_released(&"grappling_hook"):
+		rope_origin.scale.z = 0.001
+		grapple_point = Vector3.INF

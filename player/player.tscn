@@ -2,8 +2,35 @@
 
 [ext_resource type="Script" uid="uid://buintld2ix3qd" path="res://player/player.gd" id="1_oul6g"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_qcud2"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+radial_segments = 16
+
+[sub_resource type="SphereMesh" id="SphereMesh_qcud2"]
+radius = 0.1
+height = 0.2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qcud2"]
 radius = 0.2
+
+[sub_resource type="Gradient" id="Gradient_oul6g"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.8982558, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
+gradient = SubResource("Gradient_oul6g")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcud2"]
+font_size = 32
 
 [node name="Player" type="CharacterBody3D" unique_id=561281273]
 collision_layer = 2
@@ -15,6 +42,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=711918599]
 
+[node name="Cursor" type="RayCast3D" parent="Head/Camera3D" unique_id=2131477332]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -100)
+
+[node name="HandL" type="Marker3D" parent="Head" unique_id=623113088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, -0.42499995, -0.44)
+
+[node name="RopeOrigin" type="Marker3D" parent="Head/HandL" unique_id=2034669191]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Rope" type="MeshInstance3D" parent="Head/HandL/RopeOrigin" unique_id=1410895753]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.5)
+mesh = SubResource("CylinderMesh_qcud2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandL" unique_id=42557911]
+mesh = SubResource("SphereMesh_qcud2")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213292192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qcud2")
+
+[node name="Crosshair" type="TextureRect" parent="." unique_id=607410982]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qcud2")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=1441251048]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Right-click to grapple"
+label_settings = SubResource("LabelSettings_qcud2")
