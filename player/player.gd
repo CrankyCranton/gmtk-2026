@@ -38,6 +38,9 @@ var wallRunMomentum: float = 0.0 #Speed bonus that builds up as you wall run
 var coyoteJump = true
 var wallRunCoyoteJump = false
 var wall_normal = null
+var can_dash = true
+var dash_speed: float = 40.0
+@onready var dash_timer = $DashCooldown
 @onready var wall_run_coyote_timer = $WallRunCoyoteTimer
 @onready var coyoteTimer = $CoyoteTimer
 @onready var head: Marker3D = $Head
@@ -67,6 +70,13 @@ func _physics_process(delta: float) -> void:
 	# Kind of a hack solution, so might need cleaning later.
 	# But it makes it so that you won't get an extra mid-air jump if you fall off
 	# a platform without jumping.
+	if can_dash == true:
+		if Input.is_action_just_pressed("dash"):
+			can_dash = false
+			velocity += basis.z * -dash_speed
+			dash_timer.start()
+			$Head/Camera3D.damp = 2
+	
 	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
 			and not is_on_wall()):
 		velocity.y = jump_force
@@ -165,3 +175,8 @@ func _on_coyote_timer_timeout() -> void:
 
 func _on_wall_run_coyote_timer_timeout() -> void:
 	wallRunCoyoteJump
+
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true
+	$Head/Camera3D.damp = 1

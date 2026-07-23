@@ -23,14 +23,15 @@ sky_material = SubResource("ProceduralSkyMaterial_20pvy")
 [sub_resource type="Environment" id="Environment_01rkt"]
 background_mode = 2
 sky = SubResource("Sky_p5upd")
-ambient_light_sky_contribution = 0.45
+ambient_light_sky_contribution = 0.5
 ambient_light_energy = 0.0
+fog_enabled = true
 fog_light_color = Color(0.13009274, 0.14534974, 0.16909006, 1)
-fog_density = 0.03
 fog_sky_affect = 0.1
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_albedo = Color(0.31061712, 0.31061712, 0.3106171, 1)
+volumetric_fog_emission_energy = 0.0
 volumetric_fog_length = 128.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhbrn"]
@@ -58,7 +59,7 @@ depth = 12
 noise = SubResource("FastNoiseLite_na4dw")
 
 [sub_resource type="FogMaterial" id="FogMaterial_42ije"]
-density = 7.482
+density = 4.12
 albedo = Color(0.17641911, 0.17641908, 0.17641908, 1)
 height_falloff = 0.1572976
 density_texture = SubResource("NoiseTexture3D_7jtei")
@@ -70,7 +71,8 @@ environment = SubResource("Environment_01rkt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1167872164]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-visible = false
+light_energy = 0.2
+light_volumetric_fog_energy = 5.0
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=561281273 instance=ExtResource("1_p5upd")]
@@ -141,7 +143,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0763044, 3.5539181, -2.903
 [node name="FallZone" parent="." unique_id=1653106153 instance=ExtResource("2_01rkt")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallZone" unique_id=1547167355]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.020767, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.787085, 0)
 shape = SubResource("WorldBoundaryShape3D_oul6g")
 
 [node name="Boss" parent="." unique_id=71158431 instance=ExtResource("3_d8qi5")]

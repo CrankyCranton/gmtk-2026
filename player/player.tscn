@@ -112,6 +112,11 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="DashCooldown" type="Timer" parent="." unique_id=1258535820]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="WallRunCoyoteTimer" to="." method="_on_wall_run_coyote_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
