@@ -2,12 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://cna1uay0kbei2" path="res://player/player.tscn" id="1_p5upd"]
 [ext_resource type="PackedScene" uid="uid://niqikqicu8fe" path="res://level/fall_zone/fall_zone.tscn" id="2_01rkt"]
+[ext_resource type="PackedScene" uid="uid://b6yae7ndo6nys" path="res://TestFireBall.tscn" id="2_yh54m"]
 [ext_resource type="PackedScene" uid="uid://d16txdo6yckr" path="res://boss/boss.tscn" id="3_d8qi5"]
 [ext_resource type="PackedScene" uid="uid://bwcgc283d4cqs" path="res://hud/contract/contract.tscn" id="4_j7wmq"]
 [ext_resource type="PackedScene" uid="uid://bdiytlr40x7wt" path="res://level/levelParts/MeshesWithCollision/wood_bridge.tscn" id="5_tvde0"]
 [ext_resource type="PackedScene" uid="uid://dqq7jkx608vxl" path="res://level/Enviroment/wood_spiral.tscn" id="6_6tqrk"]
 [ext_resource type="PackedScene" uid="uid://qtdd1633exqx" path="res://level/levelParts/MeshesWithCollision/HangingScroll.tscn" id="7_kvcyj"]
 [ext_resource type="PackedScene" uid="uid://0jgxtjhicfb2" path="res://level/levelParts/Meshes/chains.tscn" id="8_n27om"]
+[ext_resource type="PackedScene" uid="uid://kvvxtsyh8517" path="res://level/levelParts/iron_spike.tscn" id="9_7gl6n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
 sky_top_color = Color(0.06773608, 0.03816831, 0.046645105, 1)
@@ -21,10 +23,15 @@ sky_material = SubResource("ProceduralSkyMaterial_20pvy")
 [sub_resource type="Environment" id="Environment_01rkt"]
 background_mode = 2
 sky = SubResource("Sky_p5upd")
-glow_enabled = true
-fog_enabled = true
+ambient_light_sky_contribution = 0.45
+ambient_light_energy = 0.0
 fog_light_color = Color(0.13009274, 0.14534974, 0.16909006, 1)
+fog_density = 0.03
 fog_sky_affect = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.31061712, 0.31061712, 0.3106171, 1)
+volumetric_fog_length = 128.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhbrn"]
 
@@ -42,6 +49,20 @@ point_count = 2
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_oul6g"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_na4dw"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_7jtei"]
+width = 12
+height = 12
+depth = 12
+noise = SubResource("FastNoiseLite_na4dw")
+
+[sub_resource type="FogMaterial" id="FogMaterial_42ije"]
+density = 7.482
+albedo = Color(0.17641911, 0.17641908, 0.17641908, 1)
+height_falloff = 0.1572976
+density_texture = SubResource("NoiseTexture3D_7jtei")
+
 [node name="LevelBase" type="Node3D" unique_id=1447989969]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1103661663]
@@ -49,6 +70,7 @@ environment = SubResource("Environment_01rkt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1167872164]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=561281273 instance=ExtResource("1_p5upd")]
@@ -75,7 +97,7 @@ transform = Transform3D(0.9330128, -0.25000003, -0.25881907, 0.25881907, 0.96592
 size = Vector3(1, 10, 26)
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1915376083]
-transform = Transform3D(0.96547174, -0.2586974, -0.030663177, 0.2588191, 0.96592605, 3.8567047e-09, 0.029618323, -0.007936206, 0.9995298, -10.375, 2.585185, -16.09724)
+transform = Transform3D(0.96547174, -0.2586974, -0.030663177, 0.2588191, 0.96592605, 3.8567047e-09, 0.029618323, -0.007936206, 0.9995298, -13.342554, 2.585185, -16.09724)
 size = Vector3(1, 10, 26)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=230315939]
@@ -113,10 +135,13 @@ size = Vector3(1, 25, 9)
 [node name="Path3D" type="Path3D" parent="CSGCombiner3D" unique_id=868033875]
 curve = SubResource("Curve3D_j7wmq")
 
+[node name="MeshInstance3D" parent="CSGCombiner3D" unique_id=1101144198 instance=ExtResource("2_yh54m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0763044, 3.5539181, -2.903678)
+
 [node name="FallZone" parent="." unique_id=1653106153 instance=ExtResource("2_01rkt")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallZone" unique_id=1547167355]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -60, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.020767, 0)
 shape = SubResource("WorldBoundaryShape3D_oul6g")
 
 [node name="Boss" parent="." unique_id=71158431 instance=ExtResource("3_d8qi5")]
@@ -150,6 +175,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.814236, 0.803524)
 
 [node name="Chains6" parent="HangingScroll" unique_id=1970257067 instance=ExtResource("8_n27om")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.814236, -0.88163996)
+
+[node name="IronSpike" parent="." unique_id=1366822243 instance=ExtResource("9_7gl6n")]
+transform = Transform3D(-3.8525133, 2.2426553, -2.2646506, 1.9333577, 4.4688363, 1.1364994, 2.5338254, -5.520718e-09, -4.3104215, -98.40629, -77.580215, -3.2660522)
+
+[node name="IronSpike2" parent="." unique_id=1983187199 instance=ExtResource("9_7gl6n")]
+transform = Transform3D(-5.39628, 2.3118777, -1.2391063, 2.0510554, 5.485903, 1.3030914, 1.6350337, 0.7483947, -5.724209, -98.40629, -77.580215, -63.443398)
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1735758421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.62262, -69.01522, 0)
+size = Vector3(3000, 500, 3000)
+material = SubResource("FogMaterial_42ije")
 
 [connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
 [connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]

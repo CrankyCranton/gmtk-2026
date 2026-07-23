@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b6yae7ndo6nys"]
+
+[ext_resource type="Shader" uid="uid://bptr6o0lcoddj" path="res://Fire.tres" id="1_gb1vp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_42ije"]
+
+[sub_resource type="Gradient" id="Gradient_gb1vp"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7255m"]
+gradient = SubResource("Gradient_gb1vp")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3t1wd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.30597016, 0.3432836, 0.5, 0.74626863)
+colors = PackedColorArray(1, 0.42112675, 0.305374, 1, 0.95233446, 0, 0.114763, 1, 0.7056631, 0, 0.020737614, 1, 0.53909683, 0, 0.025807276, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6nxuj"]
+gradient = SubResource("Gradient_3t1wd")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_goafv"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.05970149, 0.48507464)
+colors = PackedColorArray(0, 0, 0, 1, 0.66656864, 0.6665687, 0.66656864, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3t1wd"]
+gradient = SubResource("Gradient_goafv")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_6nxuj"]
+offsets = PackedFloat32Array(0.15671642, 0.3432836, 0.8358209)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xagf6"]
+gradient = SubResource("Gradient_6nxuj")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhhf8"]
+render_priority = 0
+shader = ExtResource("1_gb1vp")
+shader_parameter/Add = SubResource("GradientTexture2D_7255m")
+shader_parameter/Subtract = SubResource("GradientTexture2D_xagf6")
+shader_parameter/Colors = SubResource("GradientTexture2D_6nxuj")
+shader_parameter/ConstantRamp = SubResource("GradientTexture2D_3t1wd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" unique_id=1101144198]
+mesh = SubResource("SphereMesh_42ije")
+surface_material_override/0 = SubResource("ShaderMaterial_bhhf8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=380083291]
+light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
+light_energy = 5.0
+omni_range = 15.0

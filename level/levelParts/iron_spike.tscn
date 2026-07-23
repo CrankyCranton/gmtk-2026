@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://kvvxtsyh8517"]
+
+[ext_resource type="PackedScene" uid="uid://i3yhbqil60ef" path="res://level/levelParts/Meshes/IronSpike.glb" id="1_x61cl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_42ije"]
+top_radius = 1.6533203
+bottom_radius = 4.528
+height = 70.22388
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhhf8"]
+shading_mode = 0
+albedo_color = Color(0.10980392, 0.10980392, 0.10980392, 1)
+
+[node name="IronSpike" type="Node3D" unique_id=1366822243]
+
+[node name="IronSpike" parent="." unique_id=204203039 instance=ExtResource("1_x61cl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.05604899)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1379708650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3756553, -38.11194, 0)
+mesh = SubResource("CylinderMesh_42ije")
+surface_material_override/0 = SubResource("StandardMaterial3D_bhhf8")

@@ -69,4 +69,5 @@ grappling_hook={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
+environment/volumetric_fog/volume_size=16
+environment/volumetric_fog/volume_depth=16
