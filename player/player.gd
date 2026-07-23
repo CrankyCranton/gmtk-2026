@@ -5,18 +5,20 @@ signal counters_changed(counters: Dictionary[String, int])
 signal counters_initialized(counters: Dictionary[String, int])
 
 const MAX_TILT: float = deg_to_rad(90.0)
-const MAX_WALL_JUMPS: int = 3
+# If some guy does this many wall jumps, he deserves the honour of breaking the game.
+const MAX_WALL_JUMPS: int = 9_999_999_999
 const MAX_AIR_JUMPS: int = 1
 const WALL_CAM_TILT := deg_to_rad(15.0)
 const CAM_TILT_SPEED: float = 10.0
 
 var counters: Dictionary[String, int] = {
 	"health": 3,
-	"ammo": 5,
-	"jumps": 10,
-	"wall_jumps": 15,
-	"grappling_hooks": 5,
-	"time": 30,
+	"ammo": 50,
+	"jumps": 14,
+	"dashes": 3,
+	"wall_jumps": 10,
+	"grappling_hooks": 3,
+	"time": 50,
 }
 # Only restores when the player hits the floor, not wall.
 var wall_jumps_left: int = 0
@@ -24,8 +26,8 @@ var air_jumps_left: int = 0
 var jump_force: float = 10.0
 var wall_jump_force: float = 20.0
 var gravity_scale: float = 2.0
-var wallrun_gravity_scale: float = 0.05
-var traction: float = 5.0
+var wallrun_gravity_scale: float = 0.01
+var traction: float = 8.0
 var air_traction: float = 2.0
 var speed: float = 12.0
 var wallrun_speed: float = 20.0
@@ -74,7 +76,8 @@ func _physics_process(delta: float) -> void:
 	# But it makes it so that you won't get an extra mid-air jump if you fall off
 	# a platform without jumping.
 	if can_dash == true:
-		if Input.is_action_just_pressed("dash"):
+		if Input.is_action_just_pressed("dash") and counters["dashes"] > 0:
+			tick_counter("dashes")
 			can_dash = false
 			velocity += basis.z * -dash_speed
 			dash_timer.start()

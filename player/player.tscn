@@ -51,7 +51,7 @@ script = ExtResource("2_g1dw6")
 [node name="Cursor" type="ShapeCast3D" parent="Head/Camera3D" unique_id=449532137]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_qcud2")
-target_position = Vector3(0, 0, -200)
+target_position = Vector3(0, 0, -50)
 
 [node name="SpeedLines" parent="Head/Camera3D" unique_id=1243229281 instance=ExtResource("2_rkbax")]
 
@@ -71,9 +71,10 @@ mesh = SubResource("SphereMesh_qcud2")
 
 [node name="HandR" type="Marker3D" parent="Head" unique_id=1238240418]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, -0.425, -0.44)
+transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.087155774, 0, 0.087155774, 0.9961947, 0, -0.32499993, -0.44)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandR" unique_id=42666882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
 mesh = SubResource("SphereMesh_qcud2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213292192]
