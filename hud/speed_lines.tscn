@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://fggutynthvn0"]
+
+[ext_resource type="Shader" uid="uid://dufb1odb778xk" path="res://hud/SpeedLines.gdshader" id="1_sclyp"]
+
+[sub_resource type="Gradient" id="Gradient_6uslo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qkh0x"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jop2c"]
+noise = SubResource("FastNoiseLite_qkh0x")
+color_ramp = SubResource("Gradient_6uslo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w661w"]
+shader = ExtResource("1_sclyp")
+shader_parameter/noise = SubResource("NoiseTexture2D_jop2c")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_count = 1.05000001564626
+shader_parameter/line_density = 0.390000018525
+shader_parameter/line_faloff = 0.25
+shader_parameter/mask_size = 0.1
+shader_parameter/mask_edge = 0.5
+shader_parameter/animation_speed = 10.0000004275
+
+[node name="SpeedLines" type="Control" unique_id=1243229281]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1363536321]
+material = SubResource("ShaderMaterial_w661w")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

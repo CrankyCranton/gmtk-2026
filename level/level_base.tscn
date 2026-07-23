@@ -4,10 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://niqikqicu8fe" path="res://level/fall_zone/fall_zone.tscn" id="2_01rkt"]
 [ext_resource type="PackedScene" uid="uid://d16txdo6yckr" path="res://boss/boss.tscn" id="3_d8qi5"]
 [ext_resource type="PackedScene" uid="uid://bwcgc283d4cqs" path="res://hud/contract/contract.tscn" id="4_j7wmq"]
+[ext_resource type="PackedScene" uid="uid://bdiytlr40x7wt" path="res://level/levelParts/MeshesWithCollision/wood_bridge.tscn" id="5_tvde0"]
+[ext_resource type="PackedScene" uid="uid://dqq7jkx608vxl" path="res://level/Enviroment/wood_spiral.tscn" id="6_6tqrk"]
+[ext_resource type="PackedScene" uid="uid://qtdd1633exqx" path="res://level/levelParts/MeshesWithCollision/HangingScroll.tscn" id="7_kvcyj"]
+[ext_resource type="PackedScene" uid="uid://0jgxtjhicfb2" path="res://level/levelParts/Meshes/chains.tscn" id="8_n27om"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.06773608, 0.03816831, 0.046645105, 1)
+sky_horizon_color = Color(0.7395699, 0.2670946, 0.29767403, 1)
+ground_bottom_color = Color(0.5671045, 0.08730466, 0.109631516, 1)
+ground_horizon_color = Color(0.7826035, 0, 0.16504171, 1)
 
 [sub_resource type="Sky" id="Sky_p5upd"]
 sky_material = SubResource("ProceduralSkyMaterial_20pvy")
@@ -16,6 +22,9 @@ sky_material = SubResource("ProceduralSkyMaterial_20pvy")
 background_mode = 2
 sky = SubResource("Sky_p5upd")
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.13009274, 0.14534974, 0.16909006, 1)
+fog_sky_affect = 0.1
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhbrn"]
 
@@ -65,6 +74,10 @@ size = Vector3(2, 45, 2)
 transform = Transform3D(0.9330128, -0.25000003, -0.25881907, 0.25881907, 0.96592593, 0, 0.25, -0.0669873, 0.9659258, -10.375, 2.585185, -44.732533)
 size = Vector3(1, 10, 26)
 
+[node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1915376083]
+transform = Transform3D(0.96547174, -0.2586974, -0.030663177, 0.2588191, 0.96592605, 3.8567047e-09, 0.029618323, -0.007936206, 0.9995298, -10.375, 2.585185, -16.09724)
+size = Vector3(1, 10, 26)
+
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=230315939]
 transform = Transform3D(0.9330127, -0.25, 0.258819, 0.25881904, 0.9659259, 0, -0.25000003, 0.066987306, 0.9659258, 29, -26, -48.4)
 size = Vector3(17, 45, 27)
@@ -110,6 +123,33 @@ shape = SubResource("WorldBoundaryShape3D_oul6g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, 19.4, -175)
 
 [node name="Contract" parent="." unique_id=689693034 instance=ExtResource("4_j7wmq")]
+
+[node name="WoodBridge" parent="." unique_id=571105746 instance=ExtResource("5_tvde0")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.2481, 1.5968919, -12.508776)
+
+[node name="WoodSpiral" parent="." unique_id=1583254082 instance=ExtResource("6_6tqrk")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -274.99658, 0)
+
+[node name="HangingScroll" parent="." unique_id=114037908 instance=ExtResource("7_kvcyj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 5, 0.3885374, 0, -34.31157)
+
+[node name="Chains" parent="HangingScroll" unique_id=598283052 instance=ExtResource("8_n27om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.476327, 0.8035245)
+
+[node name="Chains2" parent="HangingScroll" unique_id=1047270087 instance=ExtResource("8_n27om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.4763274, -0.88163996)
+
+[node name="Chains3" parent="HangingScroll" unique_id=345451400 instance=ExtResource("8_n27om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.670692, 0.803524)
+
+[node name="Chains4" parent="HangingScroll" unique_id=315789370 instance=ExtResource("8_n27om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.670692, -0.88163996)
+
+[node name="Chains5" parent="HangingScroll" unique_id=1288475461 instance=ExtResource("8_n27om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.814236, 0.803524)
+
+[node name="Chains6" parent="HangingScroll" unique_id=1970257067 instance=ExtResource("8_n27om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.814236, -0.88163996)
 
 [connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
 [connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]

@@ -27,19 +27,23 @@ var gravity_scale: float = 2.0
 var wallrun_gravity_scale: float = 0.05
 var traction: float = 5.0
 var air_traction: float = 2.0
-var speed: float = 8.0
+var speed: float = 12.0
 var wallrun_speed: float = 20.0
 var mouse_sensitivity: float = 0.004 # Should probably add a setting menu for this eventually.
 var just_hit_wall := false
-var grapple_speed: float = 30.0
+var grapple_speed: float = 40.0
+var grapple_range: float = 40.0
 var grapple_point := Vector3.INF # INF means not grappling
-
+var wallRunMomentum: float = 0.0 #Speed bonus that builds up as you wall run
+var coyoteJump = true
+@onready var coyoteTimer = $CoyoteTimer
 @onready var head: Marker3D = $Head
 @onready var cursor: ShapeCast3D = %Cursor
 @onready var rope_origin: Marker3D = %RopeOrigin
 
 
 func _ready() -> void:
+	cursor.target_position.z = -grapple_range
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	counters_initialized.emit(counters.duplicate())
 
@@ -50,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	var current_speed: float = wallrun_speed if is_on_wall() else speed
 	var current_traction: float = traction if is_on_floor() or is_on_wall() else air_traction
 
-	var target_vel: Vector3 = Utils.vec2_to_3(input * current_speed).rotated(Vector3.UP, rotation.y)
+	var target_vel: Vector3 = Utils.vec2_to_3(input * current_speed * (1 + wallRunMomentum)).rotated(Vector3.UP, rotation.y)
 	velocity = velocity.lerp(target_vel, current_traction * delta)
 	velocity.y = y
 
@@ -63,30 +67,39 @@ func _physics_process(delta: float) -> void:
 	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
 			and not is_on_wall()):
 		velocity.y = jump_force
-		air_jumps_left -= 1
+		if coyoteJump == false:
+			air_jumps_left -= 1
+		coyoteJump = false
 		tick_counter("jumps")
 
 	if is_on_floor():
+		coyoteJump = true
 		wall_jumps_left = MAX_WALL_JUMPS
 		air_jumps_left = MAX_AIR_JUMPS
 		just_hit_wall = false
-	#else:
+	else:
+		if not coyoteTimer.time_left > 0.0:
+			coyoteTimer.start()
 	var target_tilt: float = 0.0
 	if is_on_wall():
+		velocity.y *= 0.97 # slow down the players gravity when on al wall
+		wallRunMomentum = clampf(wallRunMomentum + (0.35 * delta / (1+(wallRunMomentum/10))),0,3) # wallrun momentum builds up slower the more of it you have
 		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
 		if not just_hit_wall:
-			velocity.y = 0.0 # Stop gravity when you hit a wall.
+			#velocity.y = 0.0 # Stop gravity when you hit a wall.
 			just_hit_wall = true
 
 		if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0
 				and counters["wall_jumps"] > 0):
 			const WALL_PUSHOFF_WEIGHT: float = 0.6
-			velocity = Vector3.UP.slerp(get_wall_normal(), WALL_PUSHOFF_WEIGHT
+			velocity += Vector3.UP.slerp(get_wall_normal(), WALL_PUSHOFF_WEIGHT
 					) * wall_jump_force
 			wall_jumps_left -= 1
+			air_jumps_left = 1
 			tick_counter("wall_jumps")
 	else:
 		just_hit_wall = false
+		wallRunMomentum = clampf(wallRunMomentum -0.4 * delta,0,3)
 
 	var current_gravity_scale: float = gravity_scale
 	if just_hit_wall:
@@ -101,7 +114,6 @@ func _physics_process(delta: float) -> void:
 		rope_origin.look_at(grapple_point)
 		rope_origin.scale.z = rope_origin.global_position.distance_to(grapple_point)
 	move_and_slide()
-
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -134,3 +146,7 @@ func _on_timer_tick_timeout() -> void:
 		await get_tree().create_timer(1.5).timeout
 		get_tree().paused = false
 		get_tree().reload_current_scene()
+
+
+func _on_coyote_timer_timeout() -> void:
+	coyoteJump = false

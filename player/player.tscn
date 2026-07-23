@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cna1uay0kbei2"]
 
 [ext_resource type="Script" uid="uid://buintld2ix3qd" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://kbl4dbnrn8sp" path="res://player/camera_3d.gd" id="2_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://fggutynthvn0" path="res://hud/speed_lines.tscn" id="2_rkbax"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
 
@@ -44,11 +46,14 @@ script = ExtResource("1_oul6g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=711918599]
+script = ExtResource("2_g1dw6")
 
 [node name="Cursor" type="ShapeCast3D" parent="Head/Camera3D" unique_id=449532137]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_qcud2")
 target_position = Vector3(0, 0, -200)
+
+[node name="SpeedLines" parent="Head/Camera3D" unique_id=1243229281 instance=ExtResource("2_rkbax")]
 
 [node name="HandL" type="Marker3D" parent="Head" unique_id=623113088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, -0.42499995, -0.44)
@@ -99,4 +104,9 @@ label_settings = SubResource("LabelSettings_qcud2")
 [node name="TimerTick" type="Timer" parent="." unique_id=1573258086]
 autostart = true
 
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=348552646]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

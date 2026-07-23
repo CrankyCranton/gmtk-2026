@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://qtdd1633exqx"]
+
+[ext_resource type="PackedScene" uid="uid://du3k6kmugia41" path="res://level/levelParts/Meshes/HangingScroll.glb" id="1_fweau"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_82e0m"]
+size = Vector3(0.19604492, 11.454376, 2.003479)
+
+[node name="HangingScroll" type="Node3D" unique_id=114037908]
+
+[node name="HangingScroll" parent="." unique_id=61558203 instance=ExtResource("1_fweau")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1255374, 0, -0.065449)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1691834847]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=506327948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18249512, 0.12980652, -0.056854248)
+shape = SubResource("BoxShape3D_82e0m")

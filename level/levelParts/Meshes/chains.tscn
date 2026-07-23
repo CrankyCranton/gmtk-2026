@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://0jgxtjhicfb2"]
+
+[ext_resource type="PackedScene" uid="uid://crq71nmr4s544" path="res://level/levelParts/Meshes/Chains.glb" id="1_dbowm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw30f"]
+albedo_color = Color(0.27022192, 0.27022192, 0.2702219, 1)
+
+[node name="Chains" unique_id=598283052 instance=ExtResource("1_dbowm")]
+
+[node name="Chain_012" parent="." index="0" unique_id=198684550]
+surface_material_override/0 = SubResource("StandardMaterial3D_yw30f")

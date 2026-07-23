@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dqq7jkx608vxl"]
+
+[sub_resource type="Curve" id="Curve_64mlt"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_64mlt"]
+curve = SubResource("Curve_64mlt")
+
+[sub_resource type="Gradient" id="Gradient_ugsne"]
+colors = PackedColorArray(0.10747976, 0.10747973, 0.10747973, 1, 0.47007585, 0.47007585, 0.47007585, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vothv"]
+gradient = SubResource("Gradient_ugsne")
+
+[sub_resource type="Curve" id="Curve_dcsuv"]
+_data = [Vector2(0, 0.06741583), 0.0, 0.0, 0, 0, Vector2(0.06818181, 1), 0.0, 0.0, 0, 0, Vector2(0.9469697, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_g1ba7"]
+curve = SubResource("Curve_dcsuv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p8s75"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 19.55
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 80.0
+emission_ring_cone_angle = 90.0
+angle_curve = SubResource("CurveTexture_64mlt")
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+orbit_velocity_min = -0.99999994
+orbit_velocity_max = 1.0000001
+gravity = Vector3(0, 3, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = 1.9999977
+tangential_accel_max = 3.9999976
+damping_min = 3.0000002
+damping_max = 3.0000002
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_g1ba7")
+color_ramp = SubResource("GradientTexture1D_vothv")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7pylw"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.25173366, 0.12634057, 0.08855102, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dvx1o"]
+material = SubResource("StandardMaterial3D_7pylw")
+size = Vector3(1, 5, 0.2)
+
+[node name="WoodSpiral" type="GPUParticles3D" unique_id=1583254082]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+amount = 2500
+lifetime = 20.0
+preprocess = 15.0
+visibility_aabb = AABB(-40, -40, -40, 80, 80, 80)
+local_coords = true
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_p8s75")
+draw_pass_1 = SubResource("BoxMesh_dvx1o")
