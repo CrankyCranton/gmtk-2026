@@ -69,6 +69,13 @@ mesh = SubResource("CylinderMesh_qcud2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandL" unique_id=42557911]
 mesh = SubResource("SphereMesh_qcud2")
 
+[node name="HandR" type="Marker3D" parent="Head" unique_id=1238240418]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, -0.425, -0.44)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandR" unique_id=42666882]
+mesh = SubResource("SphereMesh_qcud2")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213292192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qcud2")
@@ -115,6 +122,9 @@ one_shot = true
 [node name="DashCooldown" type="Timer" parent="." unique_id=1258535820]
 wait_time = 0.5
 one_shot = true
+
+[node name="Center" type="Marker3D" parent="." unique_id=1475048057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

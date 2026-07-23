@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://qtdd1633exqx" path="res://level/levelParts/MeshesWithCollision/HangingScroll.tscn" id="7_kvcyj"]
 [ext_resource type="PackedScene" uid="uid://0jgxtjhicfb2" path="res://level/levelParts/Meshes/chains.tscn" id="8_n27om"]
 [ext_resource type="PackedScene" uid="uid://kvvxtsyh8517" path="res://level/levelParts/iron_spike.tscn" id="9_7gl6n"]
+[ext_resource type="PackedScene" uid="uid://c7whxjxwm37ka" path="res://enemy/enemy.tscn" id="11_aqcur"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
 sky_top_color = Color(0.06773608, 0.03816831, 0.046645105, 1)
@@ -188,6 +189,9 @@ transform = Transform3D(-5.39628, 2.3118777, -1.2391063, 2.0510554, 5.485903, 1.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.62262, -69.01522, 0)
 size = Vector3(3000, 500, 3000)
 material = SubResource("FogMaterial_42ije")
+
+[node name="Enemy" parent="." unique_id=399055987 instance=ExtResource("11_aqcur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -5, -45)
 
 [connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
 [connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]

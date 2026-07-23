@@ -40,12 +40,15 @@ var wallRunCoyoteJump = false
 var wall_normal = null
 var can_dash = true
 var dash_speed: float = 40.0
+
 @onready var dash_timer = $DashCooldown
 @onready var wall_run_coyote_timer = $WallRunCoyoteTimer
 @onready var coyoteTimer = $CoyoteTimer
 @onready var head: Marker3D = $Head
 @onready var cursor: ShapeCast3D = %Cursor
 @onready var rope_origin: Marker3D = %RopeOrigin
+@onready var hand_r: Marker3D = %HandR
+@onready var center: Marker3D = $Center
 
 
 func _ready() -> void:
@@ -76,7 +79,7 @@ func _physics_process(delta: float) -> void:
 			velocity += basis.z * -dash_speed
 			dash_timer.start()
 			$Head/Camera3D.damp = 2
-	
+
 	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
 			and not is_on_wall()):
 		velocity.y = jump_force
@@ -152,15 +155,19 @@ func _input(event: InputEvent) -> void:
 		rope_origin.scale.z = 0.001
 		grapple_point = Vector3.INF
 
+	if event.is_action_pressed(&"dagger") and counters["ammo"] > 0:
+		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
+		var bullet: Dagger = BULLET.instantiate()
+		add_sibling.call_deferred(bullet)
+		await bullet.ready
+		bullet.global_transform = hand_r.global_transform
+		tick_counter("ammo")
+
 
 func tick_counter(counter: String) -> void:
 	counters[counter] -= 1
 	counters_changed.emit(counters.duplicate())
-
-
-func _on_timer_tick_timeout() -> void:
-	tick_counter("time")
-	if counters["time"] <= 0:
+	if 0 in [counters["time"], counters["health"]]:
 		# Copied from fall_zone.gd. Later we'll need to find a way to link them together.
 		print("U looze")
 		get_tree().paused = true
@@ -169,12 +176,16 @@ func _on_timer_tick_timeout() -> void:
 		get_tree().reload_current_scene()
 
 
+func _on_timer_tick_timeout() -> void:
+	tick_counter("time")
+
+
 func _on_coyote_timer_timeout() -> void:
 	coyoteJump = false
 
 
 func _on_wall_run_coyote_timer_timeout() -> void:
-	wallRunCoyoteJump
+	wallRunCoyoteJump = false
 
 
 func _on_dash_cooldown_timeout() -> void:

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bdga2n5otteb2"]
+
+[ext_resource type="Script" uid="uid://brpdmdf8qdg1n" path="res://player/dagger/dagger.gd" id="1_f4bcc"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qcud2"]
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
+radius = 0.2
+
+[node name="Dagger" type="Area3D" unique_id=17389483]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_f4bcc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=212237203]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_qcud2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=16498446]
+shape = SubResource("SphereShape3D_qcud2")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
