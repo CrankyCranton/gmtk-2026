@@ -36,6 +36,9 @@ var grapple_range: float = 40.0
 var grapple_point := Vector3.INF # INF means not grappling
 var wallRunMomentum: float = 0.0 #Speed bonus that builds up as you wall run
 var coyoteJump = true
+var wallRunCoyoteJump = false
+var wall_normal = null
+@onready var wall_run_coyote_timer = $WallRunCoyoteTimer
 @onready var coyoteTimer = $CoyoteTimer
 @onready var head: Marker3D = $Head
 @onready var cursor: ShapeCast3D = %Cursor
@@ -82,6 +85,11 @@ func _physics_process(delta: float) -> void:
 			coyoteTimer.start()
 	var target_tilt: float = 0.0
 	if is_on_wall():
+		const WALL_PUSHOFF_WEIGHT: float = 0.6
+		wall_normal = Vector3.UP.slerp(get_wall_normal(), WALL_PUSHOFF_WEIGHT
+					)
+		wallRunCoyoteJump = true
+#stores the walls normal
 		velocity.y *= 0.97 # slow down the players gravity when on al wall
 		wallRunMomentum = clampf(wallRunMomentum + (0.35 * delta / (1+(wallRunMomentum/10))),0,3) # wallrun momentum builds up slower the more of it you have
 		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
@@ -89,17 +97,20 @@ func _physics_process(delta: float) -> void:
 			#velocity.y = 0.0 # Stop gravity when you hit a wall.
 			just_hit_wall = true
 
-		if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0
-				and counters["wall_jumps"] > 0):
-			const WALL_PUSHOFF_WEIGHT: float = 0.6
-			velocity += Vector3.UP.slerp(get_wall_normal(), WALL_PUSHOFF_WEIGHT
-					) * wall_jump_force
-			wall_jumps_left -= 1
-			air_jumps_left = 1
-			tick_counter("wall_jumps")
 	else:
+		if not wall_run_coyote_timer.time_left > 0.0:
+			wall_run_coyote_timer.start()
 		just_hit_wall = false
 		wallRunMomentum = clampf(wallRunMomentum -0.4 * delta,0,3)
+
+	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true
+			and counters["wall_jumps"] > 0):
+		velocity += wall_normal * wall_jump_force
+		wall_jumps_left -= 1
+		air_jumps_left = 1
+		tick_counter("wall_jumps")
+		wallRunCoyoteJump = false
+
 
 	var current_gravity_scale: float = gravity_scale
 	if just_hit_wall:
@@ -150,3 +161,7 @@ func _on_timer_tick_timeout() -> void:
 
 func _on_coyote_timer_timeout() -> void:
 	coyoteJump = false
+
+
+func _on_wall_run_coyote_timer_timeout() -> void:
+	wallRunCoyoteJump
