@@ -117,7 +117,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="WallRunCoyoteTimer" type="Timer" parent="." unique_id=1816833109]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="." unique_id=1258535820]
