@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://buintld2ix3qd" path="res://player/player.gd" id="1_oul6g"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_qcud2"]
 top_radius = 0.05
 bottom_radius = 0.05
@@ -43,9 +45,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=711918599]
 
-[node name="Cursor" type="RayCast3D" parent="Head/Camera3D" unique_id=2131477332]
+[node name="Cursor" type="ShapeCast3D" parent="Head/Camera3D" unique_id=449532137]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -100)
+shape = SubResource("SphereShape3D_qcud2")
+target_position = Vector3(0, 0, -200)
 
 [node name="HandL" type="Marker3D" parent="Head" unique_id=623113088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, -0.42499995, -0.44)

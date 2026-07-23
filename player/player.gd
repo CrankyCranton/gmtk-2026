@@ -14,8 +14,8 @@ var counters: Dictionary[String, int] = {
 	"health": 3,
 	"ammo": 5,
 	"jumps": 10,
-	"wall_jumps": 6,
-	"grappling_hooks": 3,
+	"wall_jumps": 15,
+	"grappling_hooks": 5,
 	"time": 30,
 }
 # Only restores when the player hits the floor, not wall.
@@ -25,17 +25,17 @@ var jump_force: float = 10.0
 var wall_jump_force: float = 20.0
 var gravity_scale: float = 2.0
 var wallrun_gravity_scale: float = 0.05
-var traction: float = 16.0 # Not used yet.
+var traction: float = 5.0
 var air_traction: float = 2.0
-var speed: float = 6.0
-var wallrun_speed: float = 9.0
+var speed: float = 8.0
+var wallrun_speed: float = 20.0
 var mouse_sensitivity: float = 0.004 # Should probably add a setting menu for this eventually.
 var just_hit_wall := false
-var grapple_speed: float = 20.0
+var grapple_speed: float = 30.0
 var grapple_point := Vector3.INF # INF means not grappling
 
 @onready var head: Marker3D = $Head
-@onready var cursor: RayCast3D = %Cursor
+@onready var cursor: ShapeCast3D = %Cursor
 @onready var rope_origin: Marker3D = %RopeOrigin
 
 
@@ -47,7 +47,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	var y: float = velocity.y
-	var current_speed: float = speed if is_on_floor() else wallrun_speed
+	var current_speed: float = wallrun_speed if is_on_wall() else speed
 	var current_traction: float = traction if is_on_floor() or is_on_wall() else air_traction
 
 	var target_vel: Vector3 = Utils.vec2_to_3(input * current_speed).rotated(Vector3.UP, rotation.y)
@@ -112,7 +112,7 @@ func _input(event: InputEvent) -> void:
 
 	if (event.is_action_pressed(&"grappling_hook") and cursor.is_colliding()
 			and counters["grappling_hooks"] > 0):
-		grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
+		grapple_point = (cursor.get_collision_point(0) if cursor.is_colliding()
 				else cursor.to_global(cursor.target_position))
 		tick_counter("grappling_hooks")
 	if event.is_action_released(&"grappling_hook"):
