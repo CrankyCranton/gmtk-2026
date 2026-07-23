@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dh2b43pctbjp" path="res://hud/contract/contract.gd" id="1_ffqe1"]
 
-[node name="Contract" type="VBoxContainer" unique_id=1626114302]
+[sub_resource type="LabelSettings" id="LabelSettings_oul6g"]
+font_size = 32
+
+[node name="Contract" type="Label" unique_id=689693034]
 offset_right = 40.0
 offset_bottom = 40.0
+label_settings = SubResource("LabelSettings_oul6g")
 script = ExtResource("1_ffqe1")

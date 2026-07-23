@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cna1uay0kbei2" path="res://player/player.tscn" id="1_p5upd"]
 [ext_resource type="PackedScene" uid="uid://niqikqicu8fe" path="res://level/fall_zone/fall_zone.tscn" id="2_01rkt"]
 [ext_resource type="PackedScene" uid="uid://d16txdo6yckr" path="res://boss/boss.tscn" id="3_d8qi5"]
+[ext_resource type="PackedScene" uid="uid://bwcgc283d4cqs" path="res://hud/contract/contract.tscn" id="4_j7wmq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -74,3 +75,8 @@ shape = SubResource("BoxShape3D_qcud2")
 
 [node name="Boss" parent="." unique_id=71158431 instance=ExtResource("3_d8qi5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 14.4, -14)
+
+[node name="Contract" parent="." unique_id=689693034 instance=ExtResource("4_j7wmq")]
+
+[connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
+[connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]
