@@ -3,14 +3,11 @@
 [ext_resource type="Script" uid="uid://buintld2ix3qd" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://kbl4dbnrn8sp" path="res://player/camera_3d.gd" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://fggutynthvn0" path="res://hud/speed_lines.tscn" id="2_rkbax"]
+[ext_resource type="ArrayMesh" uid="uid://bhb5qe48lwoxc" path="res://assets/Player/Equipment/Hook.obj" id="4_qjkh3"]
+[ext_resource type="ArrayMesh" uid="uid://cc5sb4iumretb" path="res://assets/Player/Equipment/Rope.obj" id="4_yw30f"]
+[ext_resource type="ArrayMesh" uid="uid://csgreitc58q22" path="res://assets/Player/Equipment/Knife.obj" id="6_g6k8r"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_qcud2"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 1.0
-radial_segments = 16
 
 [sub_resource type="SphereMesh" id="SphereMesh_qcud2"]
 radius = 0.1
@@ -58,15 +55,30 @@ target_position = Vector3(0, 0, -50)
 [node name="HandL" type="Marker3D" parent="Head" unique_id=623113088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425, -0.42499995, -0.44)
 
+[node name="Marker3D" type="Marker3D" parent="Head/HandL" unique_id=1871304267]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-05, 1, 0, -1, -4.3711385e-11, 0, 0, -0.0009999871)
+
+[node name="Hook" type="MeshInstance3D" parent="Head/HandL/Marker3D" unique_id=1448699428]
+transform = Transform3D(1, 0, 0, 0, 1, -4.3667733e-08, 0, -4.366767e-05, 1, 0, -0.5, 0)
+mesh = ExtResource("4_qjkh3")
+
 [node name="RopeOrigin" type="Marker3D" parent="Head/HandL" unique_id=2034669191]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Rope" type="MeshInstance3D" parent="Head/HandL/RopeOrigin" unique_id=1410895753]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("CylinderMesh_qcud2")
+[node name="Marker3D" type="Marker3D" parent="Head/HandL/RopeOrigin" unique_id=1300782550]
+transform = Transform3D(1, 0, 0, 0, -6.9938224e-08, 1, 0, -1.6, -4.371139e-08, 0, 0, 0)
+
+[node name="Rope" type="MeshInstance3D" parent="Head/HandL/RopeOrigin/Marker3D" unique_id=1410895753]
+mesh = ExtResource("4_yw30f")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/HandL/RopeOrigin" unique_id=1006218301]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.3711385e-08, 0, 0, -1)
+remote_path = NodePath("../../Marker3D")
+update_scale = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandL" unique_id=42557911]
+visible = false
 mesh = SubResource("SphereMesh_qcud2")
 
 [node name="HandR" type="Marker3D" parent="Head" unique_id=1238240418]
@@ -75,7 +87,12 @@ transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.087155774, 0, 0.087155774, 0.9
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandR" unique_id=42666882]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_qcud2")
+
+[node name="Knife" type="MeshInstance3D" parent="Head/HandR" unique_id=985096992]
+transform = Transform3D(1.9318516, 0.51566833, -0.04511517, -0.045115154, -0.005916998, -1.9994826, -0.51566845, 1.9323695, 0.005916849, 0, -0.02614677, -0.29885846)
+mesh = ExtResource("6_g6k8r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213292192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

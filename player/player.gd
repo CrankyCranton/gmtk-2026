@@ -156,6 +156,7 @@ func _input(event: InputEvent) -> void:
 		tick_counter("grappling_hooks")
 	if event.is_action_released(&"grappling_hook"):
 		rope_origin.scale.z = 0.001
+		rope_origin.rotation = Vector3.ZERO
 		grapple_point = Vector3.INF
 
 	if event.is_action_pressed(&"dagger") and counters["ammo"] > 0:

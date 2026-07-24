@@ -264,17 +264,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246, 16, -113)
 [node name="Enemy" parent="." unique_id=399055987 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, -42)
 
-[node name="Enemy12" parent="." unique_id=1004766614 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 241, 16, -104)
-
 [node name="Enemy13" parent="." unique_id=1198048524 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 241, 16, -123)
 
 [node name="Enemy14" parent="." unique_id=1248967939 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 241, 16, -115)
-
-[node name="Enemy15" parent="." unique_id=1929440839 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 242, 16, -119)
 
 [node name="Enemy16" parent="." unique_id=1989515974 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 245, 16, -109)
@@ -284,9 +278,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 254, 16, -110)
 
 [node name="Enemy18" parent="." unique_id=631767318 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 250, 16, -121)
-
-[node name="Enemy19" parent="." unique_id=146106254 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 238, 16, -112)
 
 [node name="Enemy2" parent="." unique_id=347768954 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 2, -84)

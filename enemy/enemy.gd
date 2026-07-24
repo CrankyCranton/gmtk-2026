@@ -3,16 +3,18 @@ class_name Enemy extends Area3D
 
 var player: Player = null
 
-
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var barrel: Marker3D = $Barrel
 
 
 func _physics_process(_delta: float) -> void:
 	if player:
-		pass
-		# TODO: Make enemy turn towards player
-		#rotation.y
+		var flat_vec: Vector2 = Utils.vec3_to_2(
+				global_position.direction_to(player.global_position))
+		flat_vec.x *= -1 # Flipped because 3D and 2D rotate in opposite directions.
+		# Rotated because X is 0 rotation in 2D
+		var angle: float = flat_vec.angle() + deg_to_rad(90.0)
+		rotation.y = angle
 
 
 func _on_detection_zone_body_entered(body: Node3D) -> void:

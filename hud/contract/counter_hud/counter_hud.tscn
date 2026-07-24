@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cy5owm7cbyder"]
+
+[ext_resource type="Texture2D" uid="uid://dnyvv3p5dnbyp" path="res://assets/UI/icon_frame.png" id="1_s0mp0"]
+[ext_resource type="Script" uid="uid://dt53lvyda1mtu" path="res://hud/contract/counter_hud/counter_hud.gd" id="2_mgccu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcud2"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7picr"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CounterHUD" type="TextureRect" unique_id=747708654]
+custom_minimum_size = Vector2(128, 128)
+texture = ExtResource("1_s0mp0")
+stretch_mode = 5
+script = ExtResource("2_mgccu")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1030299052]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="PlaceholderText" type="Label" parent="Icon" unique_id=493267835]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 112.0
+label_settings = SubResource("LabelSettings_qcud2")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Counter" type="Label" parent="." unique_id=1301090963]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "50"
+label_settings = SubResource("LabelSettings_7picr")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,15 +1,27 @@
 [gd_scene format=3 uid="uid://c7whxjxwm37ka"]
 
 [ext_resource type="Script" uid="uid://kckubs71xi6p" path="res://enemy/enemy.gd" id="1_2mvqj"]
+[ext_resource type="PackedScene" uid="uid://bkfpgydmiqvf4" path="res://assets/Imp - Enemy/Imp.glb" id="2_ofsxj"]
+[ext_resource type="Texture2D" uid="uid://cwfrw0ctvjs7u" path="res://assets/Imp - Enemy/Imp_0.png" id="3_ppra6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qcud2"]
-height = 2.375
-radius = 1.0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qcud2"]
+height = 5.1875
+radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
 radius = 40.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p200p"]
+resource_name = "material_0"
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("3_ppra6")
+emission_enabled = true
+texture_filter = 0
+texture_repeat = false
+metadata/_gltf_primary_texture_coord = 0
 
 [node name="Enemy" type="Area3D" unique_id=399055987]
 collision_layer = 4
@@ -18,12 +30,8 @@ monitoring = false
 script = ExtResource("1_2mvqj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1680464581]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1875, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59375, 0)
 shape = SubResource("CylinderShape3D_qcud2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1921754957]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_qcud2")
 
 [node name="DetectionZone" type="Area3D" parent="." unique_id=759326752]
 collision_layer = 0
@@ -36,8 +44,66 @@ shape = SubResource("SphereShape3D_qcud2")
 [node name="ShootTimer" type="Timer" parent="." unique_id=1797330426]
 
 [node name="Barrel" type="Marker3D" parent="." unique_id=1210935427]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(4, 0, 0, 0, 3.9999995, 0, 0, 0, 4, -0.16, 1.9623113, -1.488)
+
+[node name="blockbench_export" parent="." unique_id=1912274282 instance=ExtResource("2_ofsxj")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="Skeleton3D" parent="blockbench_export/armature" parent_id_path=PackedInt32Array(1912274282, 683308163) index="0" unique_id=993701653]
+bones/0/position = Vector3(0, 0.51808894, 0.005)
+bones/0/rotation = Quaternion(-0.15212339, 0, 0, 0.98836154)
+bones/3/rotation = Quaternion(-0.019328076, 0.17572019, 0.0034507015, 0.98424435)
+bones/4/rotation = Quaternion(-0.24227445, -0.21128075, 0.654575, 0.68424785)
+bones/5/rotation = Quaternion(-0.28111115, -0.13405302, 0.56680954, 0.7627143)
+bones/6/rotation = Quaternion(-0.19449872, -0.008339685, -0.016217036, 0.98073334)
+bones/7/rotation = Quaternion(-0.111899965, -0.4903922, 0.15980865, 0.8493851)
+bones/8/rotation = Quaternion(-0.05943811, 0.32942006, 0.75933063, 0.55800235)
+bones/9/rotation = Quaternion(-0.27342185, 0.2684096, 0.17735139, 0.9065006)
+bones/10/rotation = Quaternion(0.018538358, 0.01763197, -0.5782193, 0.8154803)
+bones/11/rotation = Quaternion(-0.058779933, -0.017725158, -0.54837793, 0.833974)
+bones/12/rotation = Quaternion(-0.8279975, -0.19519624, -0.02027011, 0.5252694)
+bones/13/rotation = Quaternion(0.039249666, -0.29813245, -0.12448522, 0.945558)
+bones/14/rotation = Quaternion(-0.05943811, -0.32942006, -0.75933063, 0.55800235)
+bones/15/rotation = Quaternion(-0.27342185, -0.2684096, -0.17735139, 0.9065006)
+bones/16/rotation = Quaternion(0.17100981, -0.1710098, 0.9698464, -0.030154057)
+bones/17/rotation = Quaternion(0.5913097, 0, 0, 0.8064446)
+bones/18/rotation = Quaternion(-0.3826835, 0, 0, 0.9238796)
+bones/19/rotation = Quaternion(0.9222227, 0.1681914, -0.062464923, 0.34251308)
+bones/20/rotation = Quaternion(0.22255549, -0.08345288, 0.3410529, 0.9094986)
+bones/21/rotation = Quaternion(0, 0, 0.29482654, 0.9555509)
+bones/22/rotation = Quaternion(-0.08040948, -0.054415792, 0.9877234, -0.12237512)
+bones/23/rotation = Quaternion(0.44228873, 0, 0, 0.8968728)
+bones/24/rotation = Quaternion(-0.46174863, 0, 0, 0.8870108)
+bones/25/position = Vector3(0.011, 0.5483556, -0.295)
+bones/25/rotation = Quaternion(-0.8690969, 0.2588804, -0.35437903, 0.22818235)
+bones/26/position = Vector3(0.048, -0.198, 0.04)
+bones/26/rotation = Quaternion(0, 0, 0.087155744, 0.9961947)
+bones/26/scale = Vector3(0.821, 1, 1)
+bones/27/position = Vector3(-0.04, 0.49057782, -0.372)
+bones/27/rotation = Quaternion(-0.8884702, 0.33770135, -0.08583411, 0.2986825)
+
+[node name="armature" parent="blockbench_export/armature/Skeleton3D" index="0" unique_id=1181561434]
+surface_material_override/0 = SubResource("StandardMaterial3D_p200p")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="blockbench_export/armature/Skeleton3D" index="1" unique_id=1574312440]
+transform = Transform3D(0.7571807, -0.5488007, 0.354253, -0.6513493, -0.5934931, 0.47276828, -0.049208865, -0.5887134, -0.80684245, -0.04, 0.49057782, -0.372)
+bone_name = "Arrow"
+bone_idx = 27
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="blockbench_export/armature/Skeleton3D/BoneAttachment3D" unique_id=164901740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+remote_path = NodePath("../../../../../Barrel")
+update_rotation = false
+
+[node name="AnimationPlayer" parent="blockbench_export" index="1" unique_id=883636281]
+autoplay = &"Idle"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1358481877]
+light_color = Color(1, 0.3372549, 0, 1)
+light_energy = 2.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+
+[editable path="blockbench_export"]
