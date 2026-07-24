@@ -7,8 +7,6 @@
 [ext_resource type="ArrayMesh" uid="uid://cc5sb4iumretb" path="res://assets/Player/Equipment/Rope.obj" id="4_yw30f"]
 [ext_resource type="ArrayMesh" uid="uid://csgreitc58q22" path="res://assets/Player/Equipment/Knife.obj" id="6_g6k8r"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
-
 [sub_resource type="SphereMesh" id="SphereMesh_qcud2"]
 radius = 0.1
 height = 0.2
@@ -45,10 +43,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=711918599]
 script = ExtResource("2_g1dw6")
 
-[node name="Cursor" type="ShapeCast3D" parent="Head/Camera3D" unique_id=449532137]
+[node name="Cursor" type="RayCast3D" parent="Head/Camera3D" unique_id=298675528]
 unique_name_in_owner = true
-shape = SubResource("SphereShape3D_qcud2")
-target_position = Vector3(0, 0, -50)
+target_position = Vector3(0, 0, -2)
 
 [node name="SpeedLines" parent="Head/Camera3D" unique_id=1243229281 instance=ExtResource("2_rkbax")]
 
