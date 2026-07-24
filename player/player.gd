@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 			$Head/Camera3D.damp = 2
 
 	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
-			and not is_on_wall()):
+			and not wallRunCoyoteJump == true):
 		velocity.y = jump_force
 		if coyoteJump == false:
 			air_jumps_left -= 1
