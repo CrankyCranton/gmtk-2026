@@ -3,6 +3,7 @@ class_name Dagger extends Area3D
 # or when they drop bellow a certain distance. (same for enemy bullets)
 
 
+signal landed_hit
 
 var speed: float = 40.0
 var gravity_scale: float = 0.05
@@ -23,4 +24,5 @@ func _on_body_entered(_body: Node3D) -> void:
 
 func _on_area_entered(area: Area3D) -> void:
 	area.queue_free()
+	landed_hit.emit()
 	queue_free()

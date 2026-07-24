@@ -1,8 +1,9 @@
 class_name Player extends CharacterBody3D
 
 
-signal counters_changed(counters: Dictionary[String, int])
-signal counters_initialized(counters: Dictionary[String, int])
+signal time_changed(time: float)
+#signal counters_changed(counters: Dictionary[String, int])
+#signal counters_initialized(counters: Dictionary[String, int])
 
 const MAX_TILT: float = deg_to_rad(90.0)
 # If some guy does this many wall jumps, he deserves the honour of breaking the game.
@@ -11,20 +12,33 @@ const MAX_AIR_JUMPS: int = 1
 const WALL_CAM_TILT := deg_to_rad(15.0)
 const CAM_TILT_SPEED: float = 10.0
 
-var counters: Dictionary[String, int] = {
-	"health": 3,
-	"ammo": 50,
-	"jumps": 14,
-	"dashes": 3,
-	"wall_jumps": 10,
-	"grappling_hooks": 3,
-	"time": 50,
+#var counters: Dictionary[String, int] = {
+	#"health": 5,
+	##"ammo": 50,
+	##"jumps": 14,
+	##"dashes": 3,
+	##"wall_jumps": 10,
+	##"grappling_hooks": 3,
+	#"time": 5,
+#}
+var time_bonuses: Dictionary[String, float] = {
+	"jump": 0.0,
+	"wall_jump": 0.0,
+	"land_hit": 5.0,
+	"throw_dagger": -1.0,
 }
+var time: float = 30.0:
+	set(value):
+		time = value
+		if time <= 0.0:
+			time = 0.0
+			lose()
+		time_changed.emit(time)
 # Only restores when the player hits the floor, not wall.
 var wall_jumps_left: int = 0
 var air_jumps_left: int = 0
 var jump_force: float = 10.0
-var wall_jump_force: float = 20.0
+var wall_jump_force: float = 25.0
 var gravity_scale: float = 2.0
 var wallrun_gravity_scale: float = 0.01
 var traction: float = 8.0
@@ -33,7 +47,7 @@ var speed: float = 12.0
 var wallrun_speed: float = 20.0
 var mouse_sensitivity: float = 0.004 # Should probably add a setting menu for this eventually.
 var just_hit_wall := false
-var grapple_speed: float = 40.0
+var grapple_speed: float = 35.0
 var grapple_range: float = 40.0
 var grapple_point := Vector3.INF # INF means not grappling
 var wallRunMomentum: float = 0.0 #Speed bonus that builds up as you wall run
@@ -56,10 +70,11 @@ var dash_speed: float = 40.0
 func _ready() -> void:
 	cursor.target_position.z = -grapple_range
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	counters_initialized.emit(counters.duplicate())
+	#counters_initialized.emit(counters.duplicate())
 
 
 func _physics_process(delta: float) -> void:
+	time -= delta
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	var y: float = velocity.y
 	var current_speed: float = wallrun_speed if is_on_wall() else speed
@@ -75,21 +90,24 @@ func _physics_process(delta: float) -> void:
 	# Kind of a hack solution, so might need cleaning later.
 	# But it makes it so that you won't get an extra mid-air jump if you fall off
 	# a platform without jumping.
-	if can_dash == true:
-		if Input.is_action_just_pressed("dash") and counters["dashes"] > 0:
-			tick_counter("dashes")
-			can_dash = false
-			velocity += basis.z * -dash_speed
-			dash_timer.start()
-			$Head/Camera3D.damp = 2
 
-	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
+	# I removed dashing to simplify the game.
+	#if can_dash == true:
+		#if Input.is_action_just_pressed("dash"):# and counters["dashes"] > 0:
+			##tick_counter("dashes")
+			#can_dash = false
+			#velocity += basis.z * -dash_speed
+			#dash_timer.start()
+			#$Head/Camera3D.damp = 2
+
+	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0# and counters["jumps"] > 0
 			and not wallRunCoyoteJump == true):
+		time += time_bonuses["jump"]
 		velocity.y = jump_force
 		if coyoteJump == false:
 			air_jumps_left -= 1
 		coyoteJump = false
-		tick_counter("jumps")
+		#tick_counter("jumps")
 
 	if is_on_floor():
 		coyoteJump = true
@@ -119,12 +137,13 @@ func _physics_process(delta: float) -> void:
 		just_hit_wall = false
 		wallRunMomentum = clampf(wallRunMomentum -0.4 * delta,0,3)
 
-	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true
-			and counters["wall_jumps"] > 0):
+	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true):
+			#and counters["wall_jumps"] > 0):
+		time += time_bonuses["wall_jump"]
 		velocity += wall_normal * wall_jump_force
 		wall_jumps_left -= 1
 		air_jumps_left = 1
-		tick_counter("wall_jumps")
+		#tick_counter("wall_jumps")
 		wallRunCoyoteJump = false
 
 
@@ -149,39 +168,44 @@ func _input(event: InputEvent) -> void:
 		head.rotation.x = clampf(head.rotation.x, -MAX_TILT, MAX_TILT)
 		rotation.y -= mouse_vel.x
 
-	if (event.is_action_pressed(&"grappling_hook") and cursor.is_colliding()
-			and counters["grappling_hooks"] > 0):
+	if (event.is_action_pressed(&"grappling_hook") and cursor.is_colliding()):
+			#and counters["grappling_hooks"] > 0):
 		grapple_point = (cursor.get_collision_point(0) if cursor.is_colliding()
 				else cursor.to_global(cursor.target_position))
-		tick_counter("grappling_hooks")
+		#tick_counter("grappling_hooks")
 	if event.is_action_released(&"grappling_hook"):
 		rope_origin.scale.z = 0.001
 		rope_origin.rotation = Vector3.ZERO
 		grapple_point = Vector3.INF
 
-	if event.is_action_pressed(&"dagger") and counters["ammo"] > 0:
+	if event.is_action_pressed(&"dagger"):# and counters["ammo"] > 0:
+		time += time_bonuses["throw_dagger"]
 		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
 		var bullet: Dagger = BULLET.instantiate()
+		bullet.landed_hit.connect(_on_dagger_landed_hit)
 		add_sibling.call_deferred(bullet)
 		await bullet.ready
 		bullet.global_transform = hand_r.global_transform
-		tick_counter("ammo")
+		#tick_counter("ammo")
 
 
-func tick_counter(counter: String) -> void:
-	counters[counter] -= 1
-	counters_changed.emit(counters.duplicate())
-	if 0 in [counters["time"], counters["health"]]:
-		# Copied from fall_zone.gd. Later we'll need to find a way to link them together.
-		print("U looze")
-		get_tree().paused = true
-		await get_tree().create_timer(1.5).timeout
-		get_tree().paused = false
-		get_tree().reload_current_scene()
+#func tick_counter(counter: String) -> void:
+	#counters[counter] -= 1
+	#counters_changed.emit(counters.duplicate())
+	#if 0 in [counters["time"], counters["health"]]:
+		#
 
 
-func _on_timer_tick_timeout() -> void:
-	tick_counter("time")
+func lose() -> void:
+	print("U looze")
+	get_tree().paused = true
+	await get_tree().create_timer(1.5).timeout
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+
+#func _on_timer_tick_timeout() -> void:
+	#tick_counter("time")
 
 
 func _on_coyote_timer_timeout() -> void:
@@ -195,3 +219,7 @@ func _on_wall_run_coyote_timer_timeout() -> void:
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	$Head/Camera3D.damp = 1
+
+
+func _on_dagger_landed_hit() -> void:
+	time += time_bonuses["land_hit"]

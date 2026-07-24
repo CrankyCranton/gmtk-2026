@@ -23,7 +23,8 @@ func set_type(type: String) -> void:
 		placeholder_text.text = type
 
 
-func set_counter(count: int) -> void:
+func set_counter(count: float) -> void:
 	if counter == null:
 		await get_tree().process_frame
-	counter.text = str(count)
+	#print(counter.text)
+	counter.text = "%0.1f" % count

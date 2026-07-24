@@ -4,6 +4,7 @@ class_name EnemyBullet extends Area3D
 
 var speed: float = 40.0
 var gravity_scale: float = 1.0
+var damage: float = 5.0
 
 
 func _physics_process(delta: float) -> void:
@@ -14,5 +15,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Player:
-		body.tick_counter("health")
+		#body.tick_counter("health")
+		body.time -= damage
 	queue_free()

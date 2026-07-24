@@ -61,22 +61,22 @@ sides = 32
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=889338867]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.6875, -11)
-radius = 2.0
+radius = 3.0
 height = 57.375
 
 [node name="CSGCylinder3D22" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1621424735]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -38.6875, -14)
-radius = 2.0
+radius = 3.0
 height = 63.375
 
 [node name="CSGCylinder3D23" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=980120224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -37.6875, -23)
-radius = 2.0
+radius = 3.0
 height = 69.375
 
 [node name="CSGCylinder3D24" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=993834027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.6875, -28)
-radius = 2.0
+radius = 3.0
 height = 45.375
 
 [node name="CSGCylinder3D25" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=701209261]
@@ -86,42 +86,42 @@ height = 65.375
 
 [node name="CSGCylinder3D26" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1247043074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -34.1875, -41)
-radius = 2.0
+radius = 3.0
 height = 62.375
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1627916268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -24.6875, -18)
-radius = 1.0
+radius = 2.0
 height = 51.375
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=844276308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -34.1875, -29)
-radius = 2.0
+radius = 3.0
 height = 68.375
 
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1579226108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -21.6875, -30)
-radius = 1.0
+radius = 2.0
 height = 49.375
 
 [node name="CSGCylinder3D6" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=996532717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -23.1875, -24)
-radius = 1.0
+radius = 2.0
 height = 48.375
 
 [node name="CSGCylinder3D7" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=891487573]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -27.6875, -17)
-radius = 2.0
+radius = 3.0
 height = 55.375
 
 [node name="CSGCylinder3D8" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=133188724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -24.09375, -38)
-radius = 2.0
+radius = 3.0
 height = 56.1875
 
 [node name="CSGCylinder3D9" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1789021869]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -22.6875, -45)
-radius = 1.0
+radius = 2.0
 height = 49.375
 
 [node name="CSGCylinder3D13" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1750970470]
@@ -171,7 +171,7 @@ height = 62.375
 
 [node name="CSGCylinder3D10" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=111125488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -25.6875, -42)
-radius = 1.0
+radius = 2.0
 height = 61.375
 
 [node name="CSGCylinder3D11" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1054252562]
@@ -264,20 +264,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246, 16, -113)
 [node name="Enemy" parent="." unique_id=399055987 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, -42)
 
+[node name="Enemy8" parent="." unique_id=1792135264 instance=ExtResource("5_xgip5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 7, -48)
+
 [node name="Enemy13" parent="." unique_id=1198048524 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 241, 16, -123)
 
 [node name="Enemy14" parent="." unique_id=1248967939 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 241, 16, -115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 242, 16, -108)
 
 [node name="Enemy16" parent="." unique_id=1989515974 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 245, 16, -109)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224, 16, -85)
 
 [node name="Enemy17" parent="." unique_id=1631544334 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 254, 16, -110)
 
 [node name="Enemy18" parent="." unique_id=631767318 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 250, 16, -121)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 221, 16, -123)
 
 [node name="Enemy2" parent="." unique_id=347768954 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 2, -84)
@@ -289,7 +292,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 2, -89)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 118, 1, -101)
 
 [node name="Enemy5" parent="." unique_id=651177223 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154, 6, -96)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154, 6, -81)
 
 [node name="Enemy6" parent="." unique_id=1307604538 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 167, 8.5, -97)
@@ -297,17 +300,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 167, 8.5, -97)
 [node name="Enemy7" parent="." unique_id=1180026159 instance=ExtResource("5_xgip5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175, 14.5, -97)
 
-[node name="Enemy8" parent="." unique_id=1804839046 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 174, 14.5, -100)
-
-[node name="Enemy9" parent="." unique_id=1659701464 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 184, 23.5, -103)
-
-[node name="Enemy10" parent="." unique_id=1543928062 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 185, 23.5, -99)
-
-[node name="Enemy11" parent="." unique_id=1828394540 instance=ExtResource("5_xgip5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 184, 23.5, -101)
-
-[connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
-[connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]
+[connection signal="time_changed" from="Player" to="Contract" method="_on_player_time_changed"]

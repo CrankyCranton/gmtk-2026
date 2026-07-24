@@ -193,5 +193,4 @@ material = SubResource("FogMaterial_42ije")
 [node name="Enemy" parent="." unique_id=399055987 instance=ExtResource("11_aqcur")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -5, -45)
 
-[connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
-[connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]
+[connection signal="time_changed" from="Player" to="Contract" method="_on_player_time_changed"]
