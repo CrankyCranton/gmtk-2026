@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://d4h73k2obno77"]
+
+[ext_resource type="PackedScene" uid="uid://cna1uay0kbei2" path="res://player/player.tscn" id="1_ipvad"]
+[ext_resource type="PackedScene" uid="uid://b6yae7ndo6nys" path="res://TestFireBall.tscn" id="2_7fmwq"]
+[ext_resource type="PackedScene" uid="uid://niqikqicu8fe" path="res://level/fall_zone/fall_zone.tscn" id="3_01ht5"]
+[ext_resource type="PackedScene" uid="uid://bwcgc283d4cqs" path="res://hud/contract/contract.tscn" id="5_eqst6"]
+[ext_resource type="PackedScene" uid="uid://bdiytlr40x7wt" path="res://level/levelParts/MeshesWithCollision/wood_bridge.tscn" id="6_pvoly"]
+[ext_resource type="PackedScene" uid="uid://dqq7jkx608vxl" path="res://level/Enviroment/wood_spiral.tscn" id="7_dvtw8"]
+[ext_resource type="PackedScene" uid="uid://qtdd1633exqx" path="res://level/levelParts/MeshesWithCollision/HangingScroll.tscn" id="8_hqh86"]
+[ext_resource type="PackedScene" uid="uid://0jgxtjhicfb2" path="res://level/levelParts/Meshes/chains.tscn" id="9_p4nlt"]
+[ext_resource type="PackedScene" uid="uid://cuc3p8xcaefbs" path="res://level/levelParts/MeshesWithCollision/wood_tower.tscn" id="10_8jp4p"]
+[ext_resource type="PackedScene" uid="uid://kvvxtsyh8517" path="res://level/levelParts/iron_spike.tscn" id="10_kxpfp"]
+[ext_resource type="PackedScene" uid="uid://c7whxjxwm37ka" path="res://enemy/enemy.tscn" id="11_xijhc"]
+[ext_resource type="PackedScene" uid="uid://civg70jpm5lyw" path="res://level/levelParts/MeshesWithCollision/exploded_wall.tscn" id="12_7fmwq"]
+[ext_resource type="PackedScene" uid="uid://cx3an7ceyne8t" path="res://level/levelParts/MeshesWithCollision/FloatingPlatform.tscn" id="13_01ht5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
+sky_top_color = Color(0.06773608, 0.03816831, 0.046645105, 1)
+sky_horizon_color = Color(0.7395699, 0.2670946, 0.29767403, 1)
+ground_bottom_color = Color(0.5671045, 0.08730466, 0.109631516, 1)
+ground_horizon_color = Color(0.7826035, 0, 0.16504171, 1)
+
+[sub_resource type="Sky" id="Sky_p5upd"]
+sky_material = SubResource("ProceduralSkyMaterial_20pvy")
+
+[sub_resource type="Environment" id="Environment_01rkt"]
+background_mode = 2
+sky = SubResource("Sky_p5upd")
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_light_color = Color(0.13009274, 0.14534974, 0.16909006, 1)
+fog_sky_affect = 0.275
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0.3665946, 0.3665946, 0.36659455, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_length = 128.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhbrn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kce6f"]
+albedo_texture = SubResource("PlaceholderTexture2D_rhbrn")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.8122524
+
+[sub_resource type="Curve3D" id="Curve3D_j7wmq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0),
+"tilts": PackedFloat32Array(0, 3.15)
+}
+point_count = 2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_oul6g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_na4dw"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_7jtei"]
+width = 12
+height = 12
+depth = 12
+noise = SubResource("FastNoiseLite_na4dw")
+
+[sub_resource type="FogMaterial" id="FogMaterial_42ije"]
+density = 4.12
+albedo = Color(0.32915857, 0.32915834, 0.32915846, 1)
+height_falloff = 0.1572976
+density_texture = SubResource("NoiseTexture3D_7jtei")
+
+[node name="level3test" type="Node3D" unique_id=1447989969]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1103661663]
+environment = SubResource("Environment_01rkt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1167872164]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.2
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=561281273 instance=ExtResource("1_ipvad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.36665, 0, 215.09062)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1423419209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.36665, 0, 215.09062)
+material_override = SubResource("StandardMaterial3D_kce6f")
+use_collision = true
+collision_mask = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=102481748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -1.8999999)
+size = Vector3(9, 0.5, 12)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=30140530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.756737, 7.9057674, -119.060745)
+size = Vector3(9, 0.5, 12)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2035172071]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.457558, 10.053627, -135.7493)
+size = Vector3(25.909668, 0.5, 12)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2129110050]
+transform = Transform3D(0.7840092, 0, -0.6207492, 0, 1, 0, 0.6207492, 0, 0.7840092, 68.72749, 10.296486, -128.98904)
+size = Vector3(25.909668, 0.5, 12)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D" unique_id=424984312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.54564, 10.296486, -99.02774)
+size = Vector3(9, 0.5, 12)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1181716586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.711624, 10.296486, -99.02774)
+size = Vector3(9, 0.5, 12)
+
+[node name="Path3D" type="Path3D" parent="CSGCombiner3D" unique_id=868033875]
+curve = SubResource("Curve3D_j7wmq")
+
+[node name="MeshInstance3D" parent="CSGCombiner3D" unique_id=1101144198 instance=ExtResource("2_7fmwq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0763044, 3.5539181, -2.903678)
+
+[node name="FallZone" parent="." unique_id=1653106153 instance=ExtResource("3_01ht5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallZone" unique_id=1547167355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.787085, 0)
+shape = SubResource("WorldBoundaryShape3D_oul6g")
+
+[node name="Contract" parent="." unique_id=689693034 instance=ExtResource("5_eqst6")]
+
+[node name="WoodBridge" parent="." unique_id=571105746 instance=ExtResource("6_pvoly")]
+transform = Transform3D(0.44844347, 0, 1.9490763, 0, 2, 0, -1.9490763, 0, 0.44844347, -135.32774, 1.5968919, 178.87875)
+
+[node name="WoodSpiral" parent="." unique_id=1583254082 instance=ExtResource("7_dvtw8")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -274.99658, 0)
+
+[node name="HangingScroll" parent="." unique_id=114037908 instance=ExtResource("8_hqh86")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 5, -234.66515, 0, 180.77905)
+
+[node name="Chains" parent="HangingScroll" unique_id=598283052 instance=ExtResource("9_p4nlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.476327, 0.8035245)
+
+[node name="Chains2" parent="HangingScroll" unique_id=1047270087 instance=ExtResource("9_p4nlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.4763274, -0.88163996)
+
+[node name="Chains3" parent="HangingScroll" unique_id=345451400 instance=ExtResource("9_p4nlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.670692, 0.803524)
+
+[node name="Chains4" parent="HangingScroll" unique_id=315789370 instance=ExtResource("9_p4nlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.670692, -0.88163996)
+
+[node name="Chains5" parent="HangingScroll" unique_id=1288475461 instance=ExtResource("9_p4nlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.814236, 0.803524)
+
+[node name="Chains6" parent="HangingScroll" unique_id=1970257067 instance=ExtResource("9_p4nlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.814236, -0.88163996)
+
+[node name="IronSpike" parent="." unique_id=1366822243 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-3.8525133, 2.2426553, -2.2646506, 1.9333577, 4.4688363, 1.1364994, 2.5338254, -5.520718e-09, -4.3104215, -233.77295, -77.580215, 211.82457)
+
+[node name="IronSpike3" parent="." unique_id=1733043216 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-8.5995245, 0.7028061, -5.05512, 0.605878, 9.975273, 0.3561577, 5.067651, 7.4505806e-08, -8.620842, -101.73287, -76.91181, 107.58525)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike3" unique_id=1515932760]
+
+[node name="IronSpike2" parent="." unique_id=1983187199 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-5.39628, 2.3118777, -1.2391063, 2.0510554, 5.485903, 1.3030914, 1.6350337, 0.7483947, -5.724209, -233.77295, -77.580215, 151.64722)
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1735758421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.62262, -69.01522, 0)
+size = Vector3(3000, 500, 3000)
+material = SubResource("FogMaterial_42ije")
+
+[node name="WoodTower" parent="." unique_id=106548583 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.91309, -6.723744, 202.29703)
+
+[node name="WoodTower4" parent="." unique_id=1886093292 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.91309, -38.372517, 202.29703)
+
+[node name="WoodTower2" parent="." unique_id=1426277071 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -133.91655, -6.723744, 154.80434)
+
+[node name="WoodTower3" parent="." unique_id=1948088948 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -133.91655, -39.807114, 154.80434)
+
+[node name="WoodTower6" parent="." unique_id=2114384126 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -131.80302, -5.8194146, 137.60329)
+
+[node name="WoodTower9" parent="." unique_id=1313758748 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -131.80302, -37.919952, 137.60329)
+
+[node name="WoodTower5" parent="." unique_id=1221847200 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -112.83192, 31.27401, 177.11713)
+
+[node name="WoodTower7" parent="." unique_id=830910781 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -112.83192, -10.23661, 177.11713)
+
+[node name="WoodTower8" parent="." unique_id=1611251897 instance=ExtResource("10_8jp4p")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -112.83192, -43.31998, 177.11713)
+
+[node name="Enemy" parent="." unique_id=399055987 instance=ExtResource("11_xijhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.65765, 2.074688, 153.95181)
+
+[node name="ExplodedWall" parent="." unique_id=1206642348 instance=ExtResource("12_7fmwq")]
+transform = Transform3D(-0.16476732, -0.033897676, -0.47085318, -0.06752209, 0.4952737, -0.01202752, 0.46721792, 0.059622504, -0.16778755, -149.7565, 5.524069, 129.32915)
+
+[node name="ExplodedWall2" parent="." unique_id=1699082683 instance=ExtResource("12_7fmwq")]
+transform = Transform3D(0.19075862, 0.014788542, -0.46194422, -0.0675221, 0.4952737, -0.012027521, 0.45722198, 0.0669716, 0.19095255, -151.00873, 5.0022583, 157.05121)
+
+[node name="FloatingPlatform" parent="." unique_id=784750712 instance=ExtResource("13_01ht5")]
+transform = Transform3D(1.4772116, 0, -0.26047227, 0, 1.5, 0, 0.26047227, 0, 1.4772116, -127.843994, 9.650829, 119.177414)
+
+[connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
+[connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]

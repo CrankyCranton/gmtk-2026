@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cx3an7ceyne8t"]
+
+[ext_resource type="PackedScene" uid="uid://5g01nlql1c7a" path="res://level/levelParts/Meshes/HangingPlatform.glb" id="1_5jqmi"]
+[ext_resource type="PackedScene" uid="uid://b77yrb0keaico" path="res://level/levelParts/Meshes/LanternCageBig.glb" id="2_djfck"]
+[ext_resource type="PackedScene" uid="uid://b6yae7ndo6nys" path="res://TestFireBall.tscn" id="3_hx36c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_42ije"]
+radius = 3.1840565
+
+[sub_resource type="SphereMesh" id="SphereMesh_hx36c"]
+radius = 2.5
+height = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hx36c"]
+size = Vector3(6.2180176, 2.7644043, 6.130615)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_afbtj"]
+size = Vector3(0.684021, 2.0369873, 0.68811035)
+
+[node name="FloatingPlatform" type="Node3D" unique_id=784750712]
+
+[node name="HangingPlatform" parent="." unique_id=2100996611 instance=ExtResource("1_5jqmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+
+[node name="LanternCageBig" parent="." unique_id=922057752 instance=ExtResource("2_djfck")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.116798, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LanternCageBig" unique_id=799211399]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LanternCageBig/StaticBody3D" unique_id=1821836852]
+shape = SubResource("SphereShape3D_42ije")
+
+[node name="MeshInstance3D" parent="." unique_id=1101144198 instance=ExtResource("3_hx36c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.079779, 0)
+mesh = SubResource("SphereMesh_hx36c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1264514138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.976433, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1775045720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010620117, 14.949829, -0.027954102)
+shape = SubResource("BoxShape3D_hx36c")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=2018954434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.558498, 16.785583, -2.6390347)
+shape = SubResource("BoxShape3D_afbtj")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=2038064418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5147676, 16.785583, -2.6390347)
+shape = SubResource("BoxShape3D_afbtj")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" unique_id=979270944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.558498, 16.785583, 2.4640565)
+shape = SubResource("BoxShape3D_afbtj")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D" unique_id=1681386718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5147676, 16.785583, 2.4640565)
+shape = SubResource("BoxShape3D_afbtj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=296620105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.473875, 0)
+light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
+light_energy = 20.0
+omni_range = 40.168
+omni_attenuation = 0.208

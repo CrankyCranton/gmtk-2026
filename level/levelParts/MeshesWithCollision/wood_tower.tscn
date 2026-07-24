@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cuc3p8xcaefbs"]
+
+[ext_resource type="PackedScene" uid="uid://cudnip8ohl7yk" path="res://level/levelParts/Meshes/WoodTower.glb" id="1_gdy5e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42ije"]
+size = Vector3(6.2180176, 33.98291, 6.130615)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bhhf8"]
+size = Vector3(0.684021, 2.0369873, 0.68811035)
+
+[node name="WoodTower" type="Node3D" unique_id=106548583]
+
+[node name="WoodTower2" parent="." unique_id=598924841 instance=ExtResource("1_gdy5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WoodTower2" unique_id=472699399]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WoodTower2/StaticBody3D" unique_id=113713167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010620117, -0.6594238, -0.027954102)
+shape = SubResource("BoxShape3D_42ije")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WoodTower2/StaticBody3D" unique_id=1317721391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.558498, 16.785583, -2.6390347)
+shape = SubResource("BoxShape3D_bhhf8")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="WoodTower2/StaticBody3D" unique_id=1213230383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5147676, 16.785583, -2.6390347)
+shape = SubResource("BoxShape3D_bhhf8")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="WoodTower2/StaticBody3D" unique_id=433352829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.558498, 16.785583, 2.4640565)
+shape = SubResource("BoxShape3D_bhhf8")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="WoodTower2/StaticBody3D" unique_id=1116585472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5147676, 16.785583, 2.4640565)
+shape = SubResource("BoxShape3D_bhhf8")

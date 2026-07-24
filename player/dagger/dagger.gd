@@ -3,7 +3,7 @@ class_name Dagger extends Area3D
 # or when they drop bellow a certain distance. (same for enemy bullets)
 
 
-var speed: float = 20.0
+var speed: float = 40.0
 var gravity_scale: float = 0.15
 var velocity := Vector3()
 
