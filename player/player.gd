@@ -19,6 +19,7 @@ var counters: Dictionary[String, int] = {
 	"wall_jumps": 25,
 	"grappling_hooks": 5,
 	"time": 50,
+	"enemies": 3,
 }
 # Only restores when the player hits the floor, not wall.
 var wall_jumps_left: int = 0
@@ -71,14 +72,14 @@ func _physics_process(delta: float) -> void:
 	var target_vel: Vector3 = Utils.vec2_to_3(input * current_speed * (1 + wallRunMomentum)).rotated(Vector3.UP, rotation.y)
 	velocity = velocity.lerp(target_vel, current_traction * delta)
 	velocity.y = y
-	
+
 	if dash_timer.time_left < 0.25 and dash_timer.time_left > 0:
 		dash_speed_bonus = 2
 	else:
 		dash_speed_bonus = 1
-	
+
 	print(wallRunMomentum)
-	
+
 	# NOTE: It's important that this is run before the if statements below,
 	# because the is_on_floor() check will restore an extra jump immediatly after
 	# if the player jumped from the floor.
@@ -120,10 +121,10 @@ func _physics_process(delta: float) -> void:
 		if not coyoteTimer.time_left > 0.0:
 			coyoteTimer.start()
 	var target_tilt: float = 0.0
-	
+
 	if not wall_normal == null && canWallStick == true:
 		velocity += wall_normal * -2
-	
+
 	if is_on_wall():
 		canWallStick = true
 		const WALL_PUSHOFF_WEIGHT: float = 0.6
@@ -193,6 +194,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"dagger") and counters["ammo"] > 0:
 		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
 		var bullet: Dagger = BULLET.instantiate()
+		bullet.hit.connect(_on_dagger_hit)
 		add_sibling.call_deferred(bullet)
 		await bullet.ready
 		bullet.global_transform = hand_r.global_transform
@@ -200,7 +202,7 @@ func _input(event: InputEvent) -> void:
 
 
 func tick_counter(counter: String) -> void:
-	counters[counter] -= 1
+	counters[counter] = maxi(0, counters[counter] - 1)
 	counters_changed.emit(counters.duplicate())
 	if 0 in [counters["time"], counters["health"]]:
 		# Copied from fall_zone.gd. Later we'll need to find a way to link them together.
@@ -230,3 +232,7 @@ func _on_dash_cooldown_timeout() -> void:
 
 func _on_walstick_timer_timeout() -> void:
 	canWallStick = false
+
+
+func _on_dagger_hit() -> void:
+	tick_counter("enemies")

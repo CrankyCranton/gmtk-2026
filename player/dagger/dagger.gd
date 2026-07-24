@@ -1,6 +1,10 @@
 class_name Dagger extends Area3D
 # TODO: Make daggers delete after a certain period of time,
 # or when they drop bellow a certain distance. (same for enemy bullets)
+
+
+signal hit
+
 @onready var death_particle = preload("res://enemy/enemy_death_particles.tscn")
 
 
@@ -27,4 +31,5 @@ func _on_area_entered(area: Area3D) -> void:
 	instance_particles.position = global_position
 	instance_particles.emitting = true
 	get_tree().root.add_child(instance_particles)
+	hit.emit()
 	queue_free()
