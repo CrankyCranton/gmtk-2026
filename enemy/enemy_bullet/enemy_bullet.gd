@@ -2,7 +2,7 @@ class_name EnemyBullet extends Area3D
 # TODO: Inherit from parent scene to merge behavior with dagger.tscn
 
 
-var speed: float = 30.0
+var speed: float = 40.0
 var gravity_scale: float = 1.0
 
 

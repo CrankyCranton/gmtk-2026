@@ -2,17 +2,29 @@
 
 [ext_resource type="Script" uid="uid://ci5xk552r6xkf" path="res://enemy/enemy_bullet/enemy_bullet.gd" id="1_n51l6"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qcud2"]
-radius = 0.1
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n51l6"]
+radius = 0.05
+height = 1.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_n51l6"]
-top_radius = 0.0
-bottom_radius = 0.1
-height = 0.2
+[sub_resource type="SphereMesh" id="SphereMesh_n51l6"]
+radius = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcud2"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_n51l6"]
+offsets = PackedFloat32Array(0.014534884, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
+gradient = SubResource("Gradient_n51l6")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
 
 [node name="EnemyBullet" type="Area3D" unique_id=1104502604]
 collision_layer = 0
@@ -20,11 +32,17 @@ collision_mask = 3
 script = ExtResource("1_n51l6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1123157838]
-shape = SubResource("SphereShape3D_qcud2")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_n51l6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=929246589]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_n51l6")
+mesh = SubResource("SphereMesh_n51l6")
 surface_material_override/0 = SubResource("StandardMaterial3D_qcud2")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1462845183]
+pixel_size = 0.02
+billboard = 1
+texture = SubResource("GradientTexture2D_qcud2")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
