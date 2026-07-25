@@ -52,7 +52,7 @@ var canWallStick = false
 @onready var wall_run_coyote_timer = $WallRunCoyoteTimer
 @onready var coyoteTimer = $CoyoteTimer
 @onready var head: Marker3D = $Head
-@onready var cursor: ShapeCast3D = %Cursor
+@onready var cursor: RayCast3D = %Cursor
 @onready var rope_origin: Marker3D = %RopeOrigin
 @onready var hand_r: Marker3D = %HandR
 @onready var center: Marker3D = $Center
@@ -172,7 +172,7 @@ func _physics_process(delta: float) -> void:
 	if grapple_point != Vector3.INF:
 		velocity += global_position.direction_to(grapple_point) * grapple_speed * delta
 		rope_origin.look_at(grapple_point)
-		rope_origin.scale.z = rope_origin.global_position.distance_to(grapple_point)
+		rope_origin.scale.z = rope_origin.global_position.distance_to(grapple_point) - 0.2
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
@@ -184,7 +184,7 @@ func _input(event: InputEvent) -> void:
 
 	if (event.is_action_pressed(&"grappling_hook") and cursor.is_colliding()
 			and counters["grappling_hooks"] != 0):
-		grapple_point = (cursor.get_collision_point(0) if cursor.is_colliding()
+		grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
 				else cursor.to_global(cursor.target_position))
 		tick_counter("grappling_hooks")
 	if event.is_action_released(&"grappling_hook"):
@@ -200,6 +200,11 @@ func _input(event: InputEvent) -> void:
 		await bullet.ready
 		bullet.global_transform = hand_r.global_transform
 		tick_counter("ammo")
+
+	if event.is_action_pressed(&"ui_cancel"):
+		# Might want to add a pause screen.
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED \
+				if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
 
 
 func tick_counter(counter: String) -> void:
