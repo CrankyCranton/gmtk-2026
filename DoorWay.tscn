@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bpfurjt2me16u"]
+
+[ext_resource type="PackedScene" uid="uid://bqhrxkexpyxwq" path="res://level/levelParts/Meshes/DoorWay.glb" id="1_0gyws"]
+[ext_resource type="PackedScene" uid="uid://bfbdrwmb04e6f" path="res://level/Enviroment/broken_wood.tscn" id="2_wua8x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42ije"]
+size = Vector3(3.991333, 19.41243, 0.15722656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gyws"]
+size = Vector3(7.2715454, 19.41243, 0.15722656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wua8x"]
+size = Vector3(3.1218414, 7.63509, 0.15722656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_veup3"]
+size = Vector3(3.1218414, 5.3877354, 0.15722656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ioejo"]
+size = Vector3(3.1218414, 6.376973, 0.15722656)
+
+[node name="DoorWay" type="Node3D" unique_id=1329050816]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="DoorWay" parent="." unique_id=352181632 instance=ExtResource("1_0gyws")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2136681250]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2060173596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0611544, -0.17954254, -0.5556474)
+shape = SubResource("BoxShape3D_42ije")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1639092589]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7502184, -0.17954254, -0.5556474)
+shape = SubResource("BoxShape3D_0gyws")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=857357553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4727793, -6.0682125, -0.5556474)
+shape = SubResource("BoxShape3D_wua8x")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" unique_id=849560707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4727793, 6.8389835, -0.5556474)
+shape = SubResource("BoxShape3D_veup3")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D" unique_id=1940764474]
+transform = Transform3D(0.19739933, 0, 0.9803233, 0, 1, 0, -0.9803233, 0, 0.19739933, 0.20542169, 0.91997004, -2.181233)
+shape = SubResource("BoxShape3D_ioejo")
+
+[node name="BrokenWood" parent="." unique_id=1583254082 instance=ExtResource("2_wua8x")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.109975, 6.382614, -0.3092096)
+
+[node name="BrokenWood4" parent="." unique_id=1217840538 instance=ExtResource("2_wua8x")]
+transform = Transform3D(-0.3, 2.6226834e-08, 0, -2.6226834e-08, -0.3, 0, 0, 0, 0.3, -7.741145, -5.507123, -0.3092096)
+
+[node name="BrokenWood2" parent="." unique_id=1929084403 instance=ExtResource("2_wua8x")]
+transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, -7.441388, 6.382614, -0.3092096)
+
+[node name="BrokenWood3" parent="." unique_id=2013011220 instance=ExtResource("2_wua8x")]
+transform = Transform3D(0.3, -2.6226834e-08, 2.6226834e-08, -2.6226834e-08, -0.3, 0, 2.6226834e-08, -2.2928227e-15, -0.3, 7.4706697, -5.3263216, -0.3092096)
