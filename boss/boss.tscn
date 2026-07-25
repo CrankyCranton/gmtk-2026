@@ -6,6 +6,32 @@
 height = 1.5
 radius = 1.0
 
+[sub_resource type="Gradient" id="Gradient_b105h"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.19140625, 0.19140625, 0.19140625, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b105h"]
+gradient = SubResource("Gradient_b105h")
+width = 512
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_nnfxe"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.73, 0.24681371, 0.34002987, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yy71b"]
+gradient = SubResource("Gradient_nnfxe")
+width = 512
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
 [node name="Boss" type="Area3D" unique_id=71158431]
 collision_layer = 0
 collision_mask = 2
@@ -21,5 +47,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 pixel_size = 0.01
 billboard = 1
 text = "BOOOOOOOSSSSS!!!"
+
+[node name="AnnoyanceBar" type="TextureProgressBar" parent="." unique_id=2024552861]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 24.0
+offset_right = 256.0
+offset_bottom = 88.0
+grow_horizontal = 2
+max_value = 1.0
+step = 0.0
+value = 0.5
+texture_under = SubResource("GradientTexture2D_b105h")
+texture_progress = SubResource("GradientTexture2D_yy71b")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
