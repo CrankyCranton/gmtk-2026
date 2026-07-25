@@ -1,4 +1,4 @@
-class_name Contract extends VBoxContainer
+class_name Contract extends BoxContainer
 
 
 var init_counters: Dictionary

@@ -13,7 +13,7 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="CounterHUD" type="TextureRect" unique_id=747708654]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(96, 96)
 texture = ExtResource("1_s0mp0")
 stretch_mode = 5
 script = ExtResource("2_mgccu")

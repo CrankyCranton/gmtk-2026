@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://cdvft7446tu26"]
+
+[ext_resource type="Script" uid="uid://cf1ufptkjekku" path="res://hud/text_screen.gd" id="1_ttwpe"]
+[ext_resource type="Texture2D" uid="uid://cxqxu76gwppfn" path="res://assets/UI/contract.png" id="2_278ru"]
+
+[sub_resource type="Gradient" id="Gradient_278ru"]
+interpolation_mode = 2
+colors = PackedColorArray(0.39, 0.14819999, 0.23282997, 0, 0.114789985, 0.028600004, 0.13, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
+gradient = SubResource("Gradient_278ru")
+width = 288
+height = 162
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcud2"]
+font_color = Color(0.62, 0.10540001, 0.22547321, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ec35"]
+font_color = Color(0.65, 0.364, 0.36876658, 1)
+
+[node name="TextScreen" type="CanvasLayer" unique_id=839307810]
+script = ExtResource("1_ttwpe")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1534167129]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.46, 0.1748, 0.27461997, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=959937569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_qcud2")
+
+[node name="ContractShadow" type="TextureRect" parent="Background" unique_id=2121849672]
+modulate = Color(0, 0, 0, 0.5019608)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -240.0
+offset_right = 248.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_278ru")
+stretch_mode = 5
+
+[node name="Contract" type="TextureRect" parent="Background" unique_id=697243207]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_278ru")
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/Contract" unique_id=1625415961]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 96
+
+[node name="Label" type="Label" parent="Background/Contract/MarginContainer" unique_id=1375706016]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_qcud2")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label" type="Label" parent="Background" unique_id=1080509288]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.5
+offset_top = -47.0
+offset_right = 103.5
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "< Press Enter to continue >"
+label_settings = SubResource("LabelSettings_7ec35")

@@ -1,6 +1,10 @@
 class_name Level extends Node3D
 
 
+const TEXT_SCREENS: Array[PackedScene] = [
+	preload("res://hud/text_screens/text_screen_intro.tscn"),
+]
+
 # Used to record the passed index from the previous level before the boss is instantiated.
 var index: int = 0
 
@@ -17,6 +21,11 @@ func _ready() -> void:
 
 	player.counters = boss.limitations[index].duplicate()
 	player.counters_initialized.emit(player.counters.duplicate())
+
+	if TEXT_SCREENS.size() <= index:
+		printerr("Not enough text screens! Level index: ", index)
+	else:
+		add_child(TEXT_SCREENS[index].instantiate())
 
 
 func load_scene() -> void:
