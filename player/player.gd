@@ -56,6 +56,7 @@ var canWallStick = false
 @onready var rope_origin: Marker3D = %RopeOrigin
 @onready var hand_r: Marker3D = %HandR
 @onready var center: Marker3D = $Center
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
@@ -208,6 +209,8 @@ func _input(event: InputEvent) -> void:
 
 
 func tick_counter(counter: String) -> void:
+	if counter == "health":
+		animation_player.play(&"hit")
 	if counters[counter] <= 0:
 		return
 	counters[counter] -= 1
