@@ -64,13 +64,20 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	var y: float = velocity.y
-	var current_speed: float = wallrun_speed if is_on_wall() else speed
+	var dash_speed_bonus = 1
+	var current_speed: float = wallrun_speed * dash_speed_bonus if is_on_wall() else speed * dash_speed_bonus
 	var current_traction: float = traction if is_on_floor() or is_on_wall() else air_traction
 
 	var target_vel: Vector3 = Utils.vec2_to_3(input * current_speed * (1 + wallRunMomentum)).rotated(Vector3.UP, rotation.y)
 	velocity = velocity.lerp(target_vel, current_traction * delta)
 	velocity.y = y
-
+	
+	if dash_timer.time_left < 0.25 and dash_timer.time_left > 0:
+		dash_speed_bonus = 2
+	else:
+		dash_speed_bonus = 1
+	
+	
 	# NOTE: It's important that this is run before the if statements below,
 	# because the is_on_floor() check will restore an extra jump immediatly after
 	# if the player jumped from the floor.
@@ -81,6 +88,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("dash") and counters["dashes"] > 0:
 			tick_counter("dashes")
 			can_dash = false
+			air_jumps_left = 1
 			velocity += basis.z * -dash_speed
 			dash_timer.start()
 			$Head/Camera3D.damp = 2
