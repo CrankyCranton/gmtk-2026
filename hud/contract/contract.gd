@@ -1,10 +1,10 @@
 class_name Contract extends VBoxContainer
 
 
-var init_counters: Dictionary[String, int]
+var init_counters: Dictionary
 
 
-func _on_player_counters_changed(counters: Dictionary[String, int]) -> void:
+func _on_player_counters_changed(counters: Dictionary) -> void:
 	for counter: String in counters:
 		var counter_hud: CounterHud = get_node(NodePath(counter))
 		counter_hud.set_counter(counters[counter])
@@ -13,7 +13,7 @@ func _on_player_counters_changed(counters: Dictionary[String, int]) -> void:
 		#text += "%s: %s/%s\n" % [counter, counters[counter], init_counters[counter]]
 
 
-func _on_player_counters_initialized(counters: Dictionary[String, int]) -> void:
+func _on_player_counters_initialized(counters: Dictionary) -> void:
 	init_counters = counters
 	for counter: String in counters:
 		print(counter)

@@ -3,10 +3,13 @@ class_name CounterHud extends TextureRect
 
 const TYPE_ICONS: Dictionary[String, Texture2D] = {
 	"ammo": preload("uid://dtb17ym3n8vo8"),
-	"dash": preload("uid://dl7bj25frbcxs"),
+	"dashes": preload("uid://dl7bj25frbcxs"),
 	"grappling_hooks": preload("uid://capwe5i801dju"),
 	"health": preload("uid://g7n3eo2i6qim"),
 	"jumps": preload("uid://cac4awpdhhnif"),
+	"air_jumps": preload("uid://6gnxtueb3hwa"), # Might want to flip icons with jumps.
+	"enemies": preload("uid://gqoq3ted3u7"),
+	"time": preload("uid://cu1ayho6x7j4w"),
 }
 
 @onready var icon: TextureRect = $Icon

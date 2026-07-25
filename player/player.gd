@@ -13,16 +13,7 @@ const MAX_AIR_JUMPS: int = 1
 const WALL_CAM_TILT := deg_to_rad(15.0)
 const CAM_TILT_SPEED: float = 10.0
 
-var counters: Dictionary[String, int] = {
-	"health": 3,
-	"ammo": 50,
-	"air_jumps": 25,
-	"dashes": 5,
-	"wall_jumps": 25,
-	"grappling_hooks": 5,
-	"time": 50,
-	"enemies": 3,
-}
+var counters: Dictionary = {}
 # Only restores when the player hits the floor, not wall.
 var wall_jumps_left: int = 0
 var air_jumps_left: int = 0
@@ -90,7 +81,7 @@ func _physics_process(delta: float) -> void:
 	# But it makes it so that you won't get an extra mid-air jump if you fall off
 	# a platform without jumping.
 	if can_dash == true:
-		if Input.is_action_just_pressed("dash") and counters["dashes"] != 0:
+		if Input.is_action_just_pressed("dash") and has_counter_remaining("dashes"):
 			tick_counter("dashes")
 			can_dash = false
 			air_jumps_left = 1
@@ -108,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	if coyoteJump == true:
 		if Input.is_action_just_pressed(&"jump"):
 			velocity.y = jump_force
-	elif air_jumps_left > 0 and counters["air_jumps"] != 0 and not wallRunCoyoteJump == true:
+	elif air_jumps_left > 0 and has_counter_remaining("air_jumps") and not wallRunCoyoteJump == true:
 		if Input.is_action_just_pressed(&"jump"):
 			velocity.y = jump_force
 			coyoteJump = false
@@ -151,7 +142,7 @@ func _physics_process(delta: float) -> void:
 		wallRunMomentum = clampf(wallRunMomentum -0.2 * delta,0,3)
 
 	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true
-			and counters["wall_jumps"] != 0):
+			and has_counter_remaining("wall_jumps")):
 		velocity += wall_normal * wall_jump_force
 		wall_jumps_left -= 1
 		air_jumps_left = 1
@@ -184,7 +175,7 @@ func _input(event: InputEvent) -> void:
 		head.rotation.x = clampf(head.rotation.x, -MAX_TILT, MAX_TILT)
 		rotation.y -= mouse_vel.x
 
-	if (event.is_action_pressed(&"grappling_hook") and counters["grappling_hooks"] != 0):
+	if event.is_action_pressed(&"grappling_hook") and has_counter_remaining("grappling_hooks"):
 		if cursor.is_colliding():
 			grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
 					else cursor.to_global(cursor.target_position))
@@ -204,7 +195,7 @@ func _input(event: InputEvent) -> void:
 		grapple_tween = create_tween()
 		recoil_hook()
 
-	if event.is_action_pressed(&"dagger") and counters["ammo"] != 0:
+	if event.is_action_pressed(&"dagger") and has_counter_remaining("ammo"):
 		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
 		var bullet: Dagger = BULLET.instantiate()
 		bullet.hit.connect(_on_dagger_hit)
@@ -229,12 +220,17 @@ func recoil_hook() -> void:
 func tick_counter(counter: String) -> void:
 	if counter == "health":
 		animation_player.play(&"hit")
-	if counters[counter] <= 0:
+	if (not counters.has(counter)) or counters[counter] <= 0:
 		return
 	counters[counter] -= 1
 	counters_changed.emit(counters.duplicate())
-	if 0 in [counters["time"], counters["health"]]:
+	if (counters.has("time") and counters["time"] == 0) \
+			or (counters.has("health") and counters["health"] == 0):
 		died.emit()
+
+
+func has_counter_remaining(counter: String) -> bool:
+	return (not counters.has(counter)) or counters[counter] != 0
 
 
 func _on_timer_tick_timeout() -> void:

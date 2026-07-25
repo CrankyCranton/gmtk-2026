@@ -141,7 +141,7 @@ mesh = SubResource("SphereMesh_qcud2")
 
 [node name="HandR" type="Marker3D" parent="Head" unique_id=1238240418]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.087155774, 0, 0.087155774, 0.9961947, 0, -0.32499993, -0.44)
+transform = Transform3D(1, 0, 0, 0, 0.99939084, -0.034899496, 0, 0.034899496, 0.99939084, 0, -0.32499993, -0.44)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/HandR" unique_id=42666882]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
