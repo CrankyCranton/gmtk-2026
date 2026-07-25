@@ -29,7 +29,7 @@ albedo_color = Color(0.7557947, 0, 0.29965955, 1)
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_jcvmu"]
 material = SubResource("StandardMaterial3D_v7i4u")
-section_length = 3.0
+section_length = 1.5
 section_segments = 5
 curve = SubResource("Curve_vrjxc")
 
@@ -39,11 +39,13 @@ albedo_color = Color(0.75686276, 0, 0.11372549, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_e2pwx"]
 material = SubResource("StandardMaterial3D_nd221")
+radius = 0.25
+height = 0.5
 radial_segments = 8
 rings = 8
 
 [node name="EnemyDeathParticles" type="GPUParticles3D" unique_id=786361230]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 amount = 50
 lifetime = 2.0
 explosiveness = 1.0

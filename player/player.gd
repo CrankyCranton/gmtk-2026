@@ -42,7 +42,9 @@ var wallRunCoyoteJump = false
 var wall_normal = null
 var can_dash = true
 var dash_speed: float = 40.0
+var canWallStick = false
 
+@onready var wallStickTimer = $WalstickTimer
 @onready var dash_timer = $DashCooldown
 @onready var wall_run_coyote_timer = $WallRunCoyoteTimer
 @onready var coyoteTimer = $CoyoteTimer
@@ -109,22 +111,29 @@ func _physics_process(delta: float) -> void:
 		if not coyoteTimer.time_left > 0.0:
 			coyoteTimer.start()
 	var target_tilt: float = 0.0
+	
+	if not wall_normal == null && canWallStick == true:
+		velocity += wall_normal * -2
+	
 	if is_on_wall():
+		canWallStick = true
 		const WALL_PUSHOFF_WEIGHT: float = 0.6
 		wall_normal = Vector3.UP.slerp(get_wall_normal(), WALL_PUSHOFF_WEIGHT
 					)
 		wallRunCoyoteJump = true
 #stores the walls normal
 		velocity.y *= -0.05 # slow down the players gravity when on al wall
-		wallRunMomentum = clampf(wallRunMomentum + (0.35 * delta / (1+(wallRunMomentum/10))),0,3) # wallrun momentum builds up slower the more of it you have
+		if velocity.length() > 5:
+			wallRunMomentum = clampf(wallRunMomentum + (0.35 * delta / (1+(wallRunMomentum/10))),0,3) # wallrun momentum builds up slower the more of it you have
 		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
 		if not just_hit_wall:
 			#velocity.y = 0.0 # Stop gravity when you hit a wall.
 			just_hit_wall = true
-
 	else:
 		if not wall_run_coyote_timer.time_left > 0.0:
 			wall_run_coyote_timer.start()
+		if not wallStickTimer.time_left > 0.0:
+			wallStickTimer.start()
 		just_hit_wall = false
 		wallRunMomentum = clampf(wallRunMomentum -0.4 * delta,0,3)
 
@@ -136,6 +145,10 @@ func _physics_process(delta: float) -> void:
 		tick_counter("wall_jumps")
 		wallRunCoyoteJump = false
 
+	if cursor.is_colliding():
+		$Crosshair.scale = Vector2(2,2)
+	else:
+		$Crosshair.scale = Vector2(1,1)
 
 	var current_gravity_scale: float = gravity_scale
 	if just_hit_wall:
@@ -204,3 +217,7 @@ func _on_wall_run_coyote_timer_timeout() -> void:
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	$Head/Camera3D.damp = 1
+
+
+func _on_walstick_timer_timeout() -> void:
+	canWallStick = false

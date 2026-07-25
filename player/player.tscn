@@ -110,6 +110,7 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_qcud2")
 stretch_mode = 2
 
@@ -144,7 +145,12 @@ one_shot = true
 [node name="Center" type="Marker3D" parent="." unique_id=1475048057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
+[node name="WalstickTimer" type="Timer" parent="." unique_id=496189799]
+wait_time = 0.05
+one_shot = true
+
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="WallRunCoyoteTimer" to="." method="_on_wall_run_coyote_timer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="WalstickTimer" to="." method="_on_walstick_timer_timeout"]
