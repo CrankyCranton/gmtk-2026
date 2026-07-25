@@ -77,6 +77,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		dash_speed_bonus = 1
 	
+	print(wallRunMomentum)
 	
 	# NOTE: It's important that this is run before the if statements below,
 	# because the is_on_floor() check will restore an extra jump immediatly after
@@ -143,7 +144,7 @@ func _physics_process(delta: float) -> void:
 		if not wallStickTimer.time_left > 0.0:
 			wallStickTimer.start()
 		just_hit_wall = false
-		wallRunMomentum = clampf(wallRunMomentum -0.4 * delta,0,3)
+		wallRunMomentum = clampf(wallRunMomentum -0.2 * delta,0,3)
 
 	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true
 			and counters["wall_jumps"] > 0):
