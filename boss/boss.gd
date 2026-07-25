@@ -40,11 +40,11 @@ func _on_body_entered(body: Player) -> void:
 		print("No enough enemies")
 		return
 
+	current_index += 1
 	if current_index >= limitations.size():
 		print("U WOOOOOOONNNNNN!!!!!!!!!!!!!!! (like, fr this time)")
-		# TODO: Load win screen.
+		get_tree().change_scene_to_packed(Level.TEXT_SCREENS.back())
 	else:
 		print("U won!")
-		current_index += 1
 		update_health_bar()
 		annoyed.emit()

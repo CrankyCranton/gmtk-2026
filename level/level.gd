@@ -1,6 +1,8 @@
 class_name Level extends Node3D
 
 
+# Should be 1 more in length than the amount of levels.
+# The last one is the end screen, loaded in boss.gd
 const TEXT_SCREENS: Array[PackedScene] = [
 	preload("res://hud/text_screens/text_screen_intro.tscn"),
 ]
