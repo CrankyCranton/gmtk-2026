@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://djx0wbs2wmi3b"]
 
 [ext_resource type="PackedScene" uid="uid://cna1uay0kbei2" path="res://player/player.tscn" id="1_210yx"]
+[ext_resource type="Script" uid="uid://cfgoi5rk0ww18" path="res://level/level.gd" id="1_yeg6v"]
 [ext_resource type="PackedScene" uid="uid://niqikqicu8fe" path="res://level/fall_zone/fall_zone.tscn" id="2_h2h7r"]
 [ext_resource type="PackedScene" uid="uid://bwcgc283d4cqs" path="res://hud/contract/contract.tscn" id="3_h2h7r"]
 [ext_resource type="PackedScene" uid="uid://d16txdo6yckr" path="res://boss/boss.tscn" id="4_m3uj7"]
@@ -27,6 +28,7 @@ albedo_texture = SubResource("PlaceholderTexture2D_7ec35")
 uv1_triplanar = true
 
 [node name="Level2Prototype" type="Node3D" unique_id=1694997596]
+script = ExtResource("1_yeg6v")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1642356541]
 environment = SubResource("Environment_yeg6v")

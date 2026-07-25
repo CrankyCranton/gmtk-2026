@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d4h73k2obno77"]
 
+[ext_resource type="Script" uid="uid://cfgoi5rk0ww18" path="res://level/level.gd" id="1_1qihr"]
 [ext_resource type="PackedScene" uid="uid://cna1uay0kbei2" path="res://player/player.tscn" id="1_ipvad"]
 [ext_resource type="PackedScene" uid="uid://b6yae7ndo6nys" path="res://TestFireBall.tscn" id="2_7fmwq"]
 [ext_resource type="PackedScene" uid="uid://niqikqicu8fe" path="res://level/fall_zone/fall_zone.tscn" id="3_01ht5"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c7whxjxwm37ka" path="res://enemy/enemy.tscn" id="11_xijhc"]
 [ext_resource type="PackedScene" uid="uid://civg70jpm5lyw" path="res://level/levelParts/MeshesWithCollision/exploded_wall.tscn" id="12_7fmwq"]
 [ext_resource type="PackedScene" uid="uid://cx3an7ceyne8t" path="res://level/levelParts/MeshesWithCollision/FloatingPlatform.tscn" id="13_01ht5"]
+[ext_resource type="PackedScene" uid="uid://d16txdo6yckr" path="res://boss/boss.tscn" id="15_eqst6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pvy"]
 sky_top_color = Color(0.06773608, 0.03816831, 0.046645105, 1)
@@ -68,6 +70,7 @@ height_falloff = 0.1572976
 density_texture = SubResource("NoiseTexture3D_7jtei")
 
 [node name="level3test" type="Node3D" unique_id=1447989969]
+script = ExtResource("1_1qihr")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1103661663]
 environment = SubResource("Environment_01rkt")
@@ -280,6 +283,9 @@ transform = Transform3D(1.7191895, 0.9925744, 0.24327263, -0.99999976, 1.7320507
 
 [node name="WoodBridge4" parent="." unique_id=1195327343 instance=ExtResource("6_pvoly")]
 transform = Transform3D(1.2022849, 0.6941394, -1.4396812, -0.9999999, 1.7320508, -3.8913868e-08, 1.2468002, 0.7198404, 1.3882793, 21.321655, 25.842117, 113.57977)
+
+[node name="Boss" parent="." unique_id=71158431 instance=ExtResource("15_eqst6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.23824, 44.212997, 107.55027)
 
 [connection signal="counters_changed" from="Player" to="Contract" method="_on_player_counters_changed"]
 [connection signal="counters_initialized" from="Player" to="Contract" method="_on_player_counters_initialized"]

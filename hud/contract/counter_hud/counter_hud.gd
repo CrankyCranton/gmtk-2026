@@ -26,4 +26,4 @@ func set_type(type: String) -> void:
 func set_counter(count: int) -> void:
 	if counter == null:
 		await get_tree().process_frame
-	counter.text = str(count)
+	counter.text = "∞" if count == -1 else str(count)
