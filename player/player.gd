@@ -2,7 +2,9 @@ class_name Player extends CharacterBody3D
 
 
 signal counters_changed(counters: Dictionary[String, int])
+@warning_ignore("unused_signal")
 signal counters_initialized(counters: Dictionary[String, int])
+signal died
 
 const MAX_TILT: float = deg_to_rad(90.0)
 # If some guy does this many wall jumps, he deserves the honour of breaking the game.
@@ -59,7 +61,6 @@ var canWallStick = false
 func _ready() -> void:
 	cursor.target_position.z = -grapple_range
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	counters_initialized.emit(counters.duplicate())
 
 
 func _physics_process(delta: float) -> void:
@@ -87,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	# But it makes it so that you won't get an extra mid-air jump if you fall off
 	# a platform without jumping.
 	if can_dash == true:
-		if Input.is_action_just_pressed("dash") and counters["dashes"] > 0:
+		if Input.is_action_just_pressed("dash") and counters["dashes"] != 0:
 			tick_counter("dashes")
 			can_dash = false
 			air_jumps_left = 1
@@ -105,7 +106,7 @@ func _physics_process(delta: float) -> void:
 	if coyoteJump == true:
 		if Input.is_action_just_pressed(&"jump"):
 			velocity.y = jump_force
-	elif air_jumps_left > 0 and counters["air_jumps"] > 0 and not wallRunCoyoteJump == true:
+	elif air_jumps_left > 0 and counters["air_jumps"] != 0 and not wallRunCoyoteJump == true:
 		if Input.is_action_just_pressed(&"jump"):
 			velocity.y = jump_force
 			coyoteJump = false
@@ -148,7 +149,7 @@ func _physics_process(delta: float) -> void:
 		wallRunMomentum = clampf(wallRunMomentum -0.2 * delta,0,3)
 
 	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true
-			and counters["wall_jumps"] > 0):
+			and counters["wall_jumps"] != 0):
 		velocity += wall_normal * wall_jump_force
 		wall_jumps_left -= 1
 		air_jumps_left = 1
@@ -182,7 +183,7 @@ func _input(event: InputEvent) -> void:
 		rotation.y -= mouse_vel.x
 
 	if (event.is_action_pressed(&"grappling_hook") and cursor.is_colliding()
-			and counters["grappling_hooks"] > 0):
+			and counters["grappling_hooks"] != 0):
 		grapple_point = (cursor.get_collision_point(0) if cursor.is_colliding()
 				else cursor.to_global(cursor.target_position))
 		tick_counter("grappling_hooks")
@@ -191,7 +192,7 @@ func _input(event: InputEvent) -> void:
 		rope_origin.rotation = Vector3.ZERO
 		grapple_point = Vector3.INF
 
-	if event.is_action_pressed(&"dagger") and counters["ammo"] > 0:
+	if event.is_action_pressed(&"dagger") and counters["ammo"] != 0:
 		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
 		var bullet: Dagger = BULLET.instantiate()
 		bullet.hit.connect(_on_dagger_hit)
@@ -202,15 +203,12 @@ func _input(event: InputEvent) -> void:
 
 
 func tick_counter(counter: String) -> void:
-	counters[counter] = maxi(0, counters[counter] - 1)
+	if counters[counter] <= 0:
+		return
+	counters[counter] -= 1
 	counters_changed.emit(counters.duplicate())
 	if 0 in [counters["time"], counters["health"]]:
-		# Copied from fall_zone.gd. Later we'll need to find a way to link them together.
-		print("U looze")
-		get_tree().paused = true
-		await get_tree().create_timer(1.5).timeout
-		get_tree().paused = false
-		get_tree().reload_current_scene()
+		died.emit()
 
 
 func _on_timer_tick_timeout() -> void:
