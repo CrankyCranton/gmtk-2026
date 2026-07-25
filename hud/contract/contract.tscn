@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dh2b43pctbjp" path="res://hud/contract/contract.gd" id="1_ffqe1"]
 
-[node name="Counters" type="HBoxContainer" unique_id=620408412]
+[node name="Counters" type="VBoxContainer" unique_id=1404313644]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

@@ -14,10 +14,10 @@ const CAM_TILT_SPEED: float = 10.0
 var counters: Dictionary[String, int] = {
 	"health": 3,
 	"ammo": 50,
-	"jumps": 14,
-	"dashes": 3,
-	"wall_jumps": 10,
-	"grappling_hooks": 3,
+	"air_jumps": 25,
+	"dashes": 5,
+	"wall_jumps": 25,
+	"grappling_hooks": 5,
 	"time": 50,
 }
 # Only restores when the player hits the floor, not wall.
@@ -83,13 +83,22 @@ func _physics_process(delta: float) -> void:
 			dash_timer.start()
 			$Head/Camera3D.damp = 2
 
-	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
-			and not wallRunCoyoteJump == true):
-		velocity.y = jump_force
-		if coyoteJump == false:
+#	if (Input.is_action_just_pressed(&"jump") and air_jumps_left > 0 and counters["jumps"] > 0
+#			and not wallRunCoyoteJump == true):
+#		velocity.y = jump_force
+#		if coyoteJump == false:
+#			air_jumps_left -= 1
+#		coyoteJump = false
+#		tick_counter("jumps")
+	if coyoteJump == true:
+		if Input.is_action_just_pressed(&"jump"):
+			velocity.y = jump_force
+	elif air_jumps_left > 0 and counters["air_jumps"] > 0 and not wallRunCoyoteJump == true:
+		if Input.is_action_just_pressed(&"jump"):
+			velocity.y = jump_force
+			coyoteJump = false
+			tick_counter("air_jumps")
 			air_jumps_left -= 1
-		coyoteJump = false
-		tick_counter("jumps")
 
 	if is_on_floor():
 		coyoteJump = true
@@ -106,7 +115,7 @@ func _physics_process(delta: float) -> void:
 					)
 		wallRunCoyoteJump = true
 #stores the walls normal
-		velocity.y *= 0.97 # slow down the players gravity when on al wall
+		velocity.y *= -0.05 # slow down the players gravity when on al wall
 		wallRunMomentum = clampf(wallRunMomentum + (0.35 * delta / (1+(wallRunMomentum/10))),0,3) # wallrun momentum builds up slower the more of it you have
 		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
 		if not just_hit_wall:

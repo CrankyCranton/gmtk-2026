@@ -1,4 +1,4 @@
-class_name Contract extends HBoxContainer
+class_name Contract extends VBoxContainer
 
 
 var init_counters: Dictionary[String, int]
