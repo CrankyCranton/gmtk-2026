@@ -16,7 +16,6 @@ var limitations: Array[Dictionary] = [
 		"ammo": 50,
 		"air_jumps": 25,
 		"dashes": 5,
-		"wall_jumps": 25,
 		"grappling_hooks": 5,
 		"time": 50,
 		"enemies": 3,
