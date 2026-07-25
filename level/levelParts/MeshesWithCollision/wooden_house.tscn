@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d210qfultcvtb"]
+
+[ext_resource type="PackedScene" uid="uid://2qetlloxp5yx" path="res://level/levelParts/Meshes/WoodHouse.glb" id="1_thndx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aieql"]
+size = Vector3(48.807617, 1, 25.415161)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42ije"]
+size = Vector3(41, 7, 1)
+
+[node name="WoodenHouse" type="Node3D" unique_id=2051456091]
+
+[node name="WoodHouse" parent="." unique_id=600451289 instance=ExtResource("1_thndx")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=597206561]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1777124362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9038086, -20, 0.07867432)
+shape = SubResource("BoxShape3D_aieql")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1771097472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -16.104872, 11)
+shape = SubResource("BoxShape3D_42ije")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1444947368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -16.104872, -11)
+shape = SubResource("BoxShape3D_42ije")
