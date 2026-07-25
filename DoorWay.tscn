@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bpfurjt2me16u"]
 
-[ext_resource type="PackedScene" uid="uid://bqhrxkexpyxwq" path="res://level/levelParts/Meshes/DoorWay.glb" id="1_0gyws"]
+[ext_resource type="PackedScene" uid="uid://ctra0idy7u71i" path="res://level/levelParts/Meshes/door_way.tscn" id="2_veup3"]
 [ext_resource type="PackedScene" uid="uid://bfbdrwmb04e6f" path="res://level/Enviroment/broken_wood.tscn" id="2_wua8x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_42ije"]
@@ -20,8 +20,6 @@ size = Vector3(3.1218414, 6.376973, 0.15722656)
 
 [node name="DoorWay" type="Node3D" unique_id=1329050816]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-
-[node name="DoorWay" parent="." unique_id=352181632 instance=ExtResource("1_0gyws")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2136681250]
 
@@ -56,3 +54,5 @@ transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0
 
 [node name="BrokenWood3" parent="." unique_id=2013011220 instance=ExtResource("2_wua8x")]
 transform = Transform3D(0.3, -2.6226834e-08, 2.6226834e-08, -2.6226834e-08, -0.3, 0, 2.6226834e-08, -2.2928227e-15, -0.3, 7.4706697, -5.3263216, -0.3092096)
+
+[node name="DoorWay2" parent="." unique_id=352181632 instance=ExtResource("2_veup3")]

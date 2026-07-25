@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d35xih8hokj7t"]
+
+[ext_resource type="PackedScene" uid="uid://du3k6kmugia41" path="res://level/levelParts/Meshes/HangingScroll.glb" id="1_2d6m3"]
+[ext_resource type="Texture2D" uid="uid://bf46gj5ujfwdc" path="res://level/levelParts/Meshes/HangingScroll_HangingScroll.png" id="2_db8b7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3qhd"]
+albedo_texture = ExtResource("2_db8b7")
+
+[node name="HangingScroll" unique_id=61558203 instance=ExtResource("1_2d6m3")]
+
+[node name="Cylinder_002" parent="." index="0" unique_id=1105165544]
+surface_material_override/0 = SubResource("StandardMaterial3D_a3qhd")

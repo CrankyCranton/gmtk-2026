@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bxvgekqkej3dy"]
+
+[ext_resource type="PackedScene" uid="uid://4a0ok8aexpex" path="res://level/levelParts/Meshes/ExplodedWall.glb" id="1_6ajyd"]
+[ext_resource type="Texture2D" uid="uid://c4p1h00ulpwif" path="res://level/levelParts/Meshes/ExplodedWall_ExplodedWall.png" id="2_d1by7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wr0hx"]
+albedo_texture = ExtResource("2_d1by7")
+
+[node name="ExplodedWall2" unique_id=605057261 instance=ExtResource("1_6ajyd")]
+
+[node name="ExplodedWall" parent="." index="0" unique_id=142261420]
+surface_material_override/0 = SubResource("StandardMaterial3D_wr0hx")

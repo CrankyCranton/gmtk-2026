@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bwmcu84d2d3oq"]
+
+[ext_resource type="PackedScene" uid="uid://cudnip8ohl7yk" path="res://level/levelParts/Meshes/WoodTower.glb" id="1_kbbnq"]
+[ext_resource type="Texture2D" uid="uid://dw5efn3lscp0o" path="res://level/levelParts/Meshes/WoodTower_WoodTower.png" id="2_2bhc8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xo12t"]
+albedo_texture = ExtResource("2_2bhc8")
+
+[node name="WoodTower2" unique_id=598924841 instance=ExtResource("1_kbbnq")]
+
+[node name="WoodTower" parent="." index="0" unique_id=1222415350]
+surface_material_override/0 = SubResource("StandardMaterial3D_xo12t")

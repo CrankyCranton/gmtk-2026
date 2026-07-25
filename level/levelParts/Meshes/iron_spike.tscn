@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ckjplpbaerhes"]
+
+[ext_resource type="PackedScene" uid="uid://i3yhbqil60ef" path="res://level/levelParts/Meshes/IronSpike.glb" id="1_f2qbd"]
+[ext_resource type="Texture2D" uid="uid://bqnoaea1ipweb" path="res://level/levelParts/Meshes/IronSpike_IronSpike.png" id="2_fqib8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnnxl"]
+albedo_texture = ExtResource("2_fqib8")
+
+[node name="IronSpike" unique_id=204203039 instance=ExtResource("1_f2qbd")]
+
+[node name="Cone" parent="." index="0" unique_id=61047486]
+surface_material_override/0 = SubResource("StandardMaterial3D_fnnxl")

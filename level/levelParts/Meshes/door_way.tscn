@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ctra0idy7u71i"]
+
+[ext_resource type="PackedScene" uid="uid://bqhrxkexpyxwq" path="res://level/levelParts/Meshes/DoorWay.glb" id="1_k56vp"]
+[ext_resource type="Texture2D" uid="uid://tcgjtjf5f2uu" path="res://level/levelParts/Meshes/DoorWay_Door.png" id="2_e5faa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8gnf"]
+albedo_texture = ExtResource("2_e5faa")
+
+[node name="DoorWay" unique_id=352181632 instance=ExtResource("1_k56vp")]
+
+[node name="Cube_1098" parent="." index="0" unique_id=1730657092]
+surface_material_override/0 = SubResource("StandardMaterial3D_q8gnf")

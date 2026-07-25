@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://tnp4od1lx4i1"]
+
+[ext_resource type="PackedScene" uid="uid://2qetlloxp5yx" path="res://level/levelParts/Meshes/WoodHouse.glb" id="1_i77ii"]
+[ext_resource type="Texture2D" uid="uid://dyevnud60grbe" path="res://level/levelParts/Meshes/WoodHouse_ExplodedHouse.png" id="2_au808"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_caogh"]
+albedo_texture = ExtResource("2_au808")
+
+[node name="WoodHouse" unique_id=600451289 instance=ExtResource("1_i77ii")]
+
+[node name="Cube_2520" parent="." index="0" unique_id=1973172588]
+surface_material_override/0 = SubResource("StandardMaterial3D_caogh")
