@@ -46,6 +46,7 @@ var wall_normal = null
 var can_dash = true
 var dash_speed: float = 40.0
 var canWallStick = false
+var grapple_tween: Tween
 
 @onready var wallStickTimer = $WalstickTimer
 @onready var dash_timer = $DashCooldown
@@ -183,15 +184,25 @@ func _input(event: InputEvent) -> void:
 		head.rotation.x = clampf(head.rotation.x, -MAX_TILT, MAX_TILT)
 		rotation.y -= mouse_vel.x
 
-	if (event.is_action_pressed(&"grappling_hook") and cursor.is_colliding()
-			and counters["grappling_hooks"] != 0):
-		grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
-				else cursor.to_global(cursor.target_position))
-		tick_counter("grappling_hooks")
+	if (event.is_action_pressed(&"grappling_hook") and counters["grappling_hooks"] != 0):
+		if cursor.is_colliding():
+			grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
+					else cursor.to_global(cursor.target_position))
+			tick_counter("grappling_hooks")
+			if grapple_tween:
+				grapple_tween.kill()
+				grapple_tween = null
+		else:
+				grapple_tween = create_tween()
+				grapple_tween.tween_property(rope_origin, ^"scale:z",
+						cursor.target_position.length(), 0.3)
+				recoil_hook()
 	if event.is_action_released(&"grappling_hook"):
-		rope_origin.scale.z = 0.001
-		rope_origin.rotation = Vector3.ZERO
 		grapple_point = Vector3.INF
+		if grapple_tween != null:
+			grapple_tween.kill()
+		grapple_tween = create_tween()
+		recoil_hook()
 
 	if event.is_action_pressed(&"dagger") and counters["ammo"] != 0:
 		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
@@ -206,6 +217,13 @@ func _input(event: InputEvent) -> void:
 		# Might want to add a pause screen.
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED \
 				if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+
+
+func recoil_hook() -> void:
+	grapple_tween.tween_property(rope_origin, ^"scale:z", 0.001, 0.3)
+	grapple_tween.tween_property(rope_origin, ^"rotation", Vector3.ZERO, 0.1)
+	await grapple_tween.finished
+	grapple_tween = null
 
 
 func tick_counter(counter: String) -> void:
