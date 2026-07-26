@@ -9,16 +9,46 @@ var limitations: Array[Dictionary] = [
 
 	},
 	{
-		"health": 3,
+		"time": 130,
 	},
 	{
-		"health": 3,
-		"ammo": 50,
-		"air_jumps": 25,
-		"dashes": 5,
-		"grappling_hooks": 5,
 		"time": 120,
-		"enemies": 2,
+		"health": 3
+	},
+	{
+		"time": 110,
+		"health": 3,
+		"dashes" : 4
+	},
+	{
+		"time": 100,
+		"health": 3,
+		"dashes" : 4,
+		"enemies" : 5
+	},
+	{
+		"time": 90,
+		"health": 3,
+		"dashes" : 4,
+		"enemies" : 5,
+		"grappling_hooks": 3
+	},
+	{
+		"time": 80,
+		"health": 3,
+		"dashes" : 4,
+		"enemies" : 5,
+		"grappling_hooks": 3,
+		"ammo": 7
+	},
+	{
+		"time": 70,
+		"health": 3,
+		"dashes" : 4,
+		"enemies" : 5,
+		"grappling_hooks": 3,
+		"ammo": 7,
+		"air_jumps" : 12
 	},
 ]
 var dialogues: Array[Array] = [
