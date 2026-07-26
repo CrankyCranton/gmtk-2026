@@ -6,6 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bhb5qe48lwoxc" path="res://assets/Player/Equipment/Hook.obj" id="4_qjkh3"]
 [ext_resource type="ArrayMesh" uid="uid://cc5sb4iumretb" path="res://assets/Player/Equipment/Rope.obj" id="4_yw30f"]
 [ext_resource type="ArrayMesh" uid="uid://csgreitc58q22" path="res://assets/Player/Equipment/Knife.obj" id="6_g6k8r"]
+[ext_resource type="Script" uid="uid://b80oqrmvc7c3d" path="res://player/label.gd" id="7_boad6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qcud2"]
 radius = 0.1
@@ -189,9 +190,11 @@ text = "WASD to move
 Space to jump
 Shift to dash
 Left-click to attack
-Right-click to grapple"
+Right-click to grapple
+Escape to enable easy mode (OFF)"
 label_settings = SubResource("LabelSettings_qcud2")
 horizontal_alignment = 2
+script = ExtResource("7_boad6")
 
 [node name="TimerTick" type="Timer" parent="." unique_id=1573258086]
 autostart = true
@@ -205,7 +208,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="." unique_id=1258535820]
-wait_time = 0.5
+wait_time = 1.25
 one_shot = true
 
 [node name="Center" type="Marker3D" parent="." unique_id=1475048057]
