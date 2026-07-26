@@ -898,6 +898,56 @@ transform = Transform3D(-7.0970907, 0.68141687, -7.0119166, 0.605878, 9.975273, 
 
 [node name="StaticBody3D" type="StaticBody3D" parent="IronSpike3" unique_id=1515932760]
 
+[node name="IronSpike10" parent="." unique_id=1396244521 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-5.8972282, 0.39506006, -1.0327762, 0.5241484, 5.933128, -0.7233716, 0.97363615, -0.80120254, -5.866013, -113.58197, -132.42085, 265.38156)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike10" unique_id=1727140779]
+
+[node name="IronSpike11" parent="." unique_id=504293741 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(5.8203816, -0.6718292, -1.2929807, 0.5241483, 5.9331274, -0.7233715, 1.3595669, 0.5887642, 5.8142014, -82.74986, -104.14197, 176.60332)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike11" unique_id=1992457497]
+
+[node name="IronSpike12" parent="." unique_id=1489321067 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(5.0504127, -1.1085287, -5.432723, 0.65518534, 7.4164085, -0.90421426, 5.50582, 0.13429537, 5.0909634, -21.135628, -109.509125, 93.1268)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike12" unique_id=660882710]
+
+[node name="IronSpike16" parent="." unique_id=1663222200 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(6.733884, -1.4780385, -7.2436323, 0.8735805, 9.888546, -1.2056193, 7.3410935, 0.17906047, 6.7879505, 76.591484, -84.53284, 108.54147)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike16" unique_id=127698365]
+
+[node name="IronSpike17" parent="." unique_id=917242852 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(8.7885475, -1.1274545, 4.63576, 1.6767492, 9.826812, -0.78884816, -4.466535, 1.4705833, 8.825386, 44.223602, -84.53284, -40.26935)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike17" unique_id=11557409]
+
+[node name="IronSpike18" parent="." unique_id=1155246979 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(8.865078, -0.34404787, 4.6143236, 0.09390938, 9.983642, 0.56396806, -4.6261806, -0.4566294, 8.853809, 176.8128, -84.53284, -89.29629)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike18" unique_id=871854918]
+
+[node name="IronSpike19" parent="." unique_id=1863827229 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-2.5625663, -0.6048595, -9.647142, -0.92688733, 9.949786, -0.37762624, 9.621544, 0.7974121, -2.6057663, 176.8128, -72.38606, 183.51678)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike19" unique_id=326837006]
+
+[node name="IronSpike13" parent="." unique_id=1089666153 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(7.070924, -0.13881242, -2.4965472, -0.562389, 7.208268, -1.9936355, 2.4363384, 2.0667837, 6.785474, -94.71502, -70.872574, -43.466118)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike13" unique_id=1757056295]
+
+[node name="IronSpike14" parent="." unique_id=1010767159 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-2.781689, -2.0070972, -4.92278, -0.736395, 5.6478662, -1.8866165, 5.2649727, -0.27047804, -2.8647704, -207.35951, -70.872574, -78.829575)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike14" unique_id=925200137]
+
+[node name="IronSpike15" parent="." unique_id=858229774 instance=ExtResource("10_kxpfp")]
+transform = Transform3D(-4.0214005, -0.0644603, -4.4524364, 0.174761, 5.992465, -0.24459888, 4.449473, -0.2936233, -4.014471, -161.32814, -70.872574, -21.453764)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IronSpike15" unique_id=1253542034]
+
 [node name="IronSpike2" parent="." unique_id=1983187199 instance=ExtResource("10_kxpfp")]
 transform = Transform3D(-4.8317423, 2.4247477, -2.6028557, 2.0510552, 5.485903, 1.3030913, 2.9064465, 0.15960026, -5.246627, -391.35233, -77.580215, 324.6089)
 
