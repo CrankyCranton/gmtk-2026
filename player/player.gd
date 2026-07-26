@@ -17,7 +17,7 @@ var counters: Dictionary = {}
 # Only restores when the player hits the floor, not wall.
 var wall_jumps_left: int = 0
 var air_jumps_left: int = 0
-var jump_force: float = 10.0
+var jump_force: float = 12.5
 var wall_jump_force: float = 20.0
 var gravity_scale: float = 2.0
 var wallrun_gravity_scale: float = 0.01
@@ -78,8 +78,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		dash_speed_bonus = 1
 
-	print(wallRunMomentum)
-
 	# NOTE: It's important that this is run before the if statements below,
 	# because the is_on_floor() check will restore an extra jump immediatly after
 	# if the player jumped from the floor.
@@ -132,7 +130,7 @@ func _physics_process(delta: float) -> void:
 					)
 		wallRunCoyoteJump = true
 #stores the walls normal
-		velocity.y *= -0.05 # slow down the players gravity when on al wall
+		velocity.y *= 0.2 # slow down the players gravity when on al wall
 		if velocity.length() > 5:
 			wallRunMomentum = clampf(wallRunMomentum + (0.35 * delta / (1+(wallRunMomentum/10))),0,3) # wallrun momentum builds up slower the more of it you have
 		target_tilt = -get_wall_normal().dot(global_basis.x) * WALL_CAM_TILT
