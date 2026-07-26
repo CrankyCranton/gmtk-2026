@@ -9,6 +9,13 @@ height = 5.0
 
 [node name="FinalHouse" type="Node3D" unique_id=145188906]
 
+[node name="OmniLight3D3" type="OmniLight3D" parent="." unique_id=654613565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9278, -11.683667, 1.0996056)
+light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
+light_energy = 20.0
+omni_range = 10.0
+omni_attenuation = 0.208
+
 [node name="WoodenHouse" parent="." unique_id=2051456091 instance=ExtResource("1_7ywpk")]
 
 [node name="FireBall" parent="WoodenHouse" unique_id=1101144198 instance=ExtResource("2_luobm")]
@@ -18,37 +25,37 @@ mesh = SubResource("SphereMesh_vx503")
 [node name="OmniLight3D2" type="OmniLight3D" parent="WoodenHouse/FireBall" unique_id=956580176]
 light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
 light_energy = 20.0
-omni_range = 80.0
+omni_range = 30.0
 omni_attenuation = 0.208
 
 [node name="FireBall4" parent="WoodenHouse" unique_id=1535022609 instance=ExtResource("2_luobm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.976879, -8.413092, -20.680996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.976879, -8.413092, -28.164066)
 mesh = SubResource("SphereMesh_vx503")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="WoodenHouse/FireBall4" unique_id=360349238]
 light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
 light_energy = 20.0
-omni_range = 80.0
+omni_range = 30.0
 omni_attenuation = 0.208
 
 [node name="FireBall5" parent="WoodenHouse" unique_id=854771468 instance=ExtResource("2_luobm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2271595, 2.814548, -22.782654)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2271595, 2.814548, -27.253937)
 mesh = SubResource("SphereMesh_vx503")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="WoodenHouse/FireBall5" unique_id=346694405]
 light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
 light_energy = 20.0
-omni_range = 40.168
+omni_range = 20.0
 omni_attenuation = 0.208
 
 [node name="FireBall6" parent="WoodenHouse" unique_id=615396526 instance=ExtResource("2_luobm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.625154, -9.957304, -19.04994)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.774927, -9.957304, -31.73101)
 mesh = SubResource("SphereMesh_vx503")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="WoodenHouse/FireBall6" unique_id=1218958306]
 light_color = Color(0.71162456, 2.2753813e-05, 0.050134808, 1)
 light_energy = 20.0
-omni_range = 40.168
+omni_range = 20.0
 omni_attenuation = 0.208
 
 [node name="FireBall2" parent="WoodenHouse" unique_id=548288338 instance=ExtResource("2_luobm")]

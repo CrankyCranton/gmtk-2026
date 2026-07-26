@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://3f7rmue3vyeb"]
+
+[ext_resource type="PackedScene" uid="uid://buhct2w01edag" path="res://assets/Boss - Goal/Boss.glb" id="1_3btgi"]
+[ext_resource type="Script" uid="uid://s63tly1w752c" path="res://level/levelParts/Meshes/blockbench_export.gd" id="2_jrm52"]
+
+[node name="blockbench_export" unique_id=1012900569 instance=ExtResource("1_3btgi")]
+script = ExtResource("2_jrm52")
+
+[node name="Skeleton3D" parent="armature" parent_id_path=PackedInt32Array(430262057) index="0" unique_id=1525953349]
+bones/0/position = Vector3(0, 0.573, -0.031)
+bones/1/rotation = Quaternion(-0.043619387, 0, 0, 0.99904823)
+bones/2/rotation = Quaternion(-0.10886688, 0, 0, 0.99405634)
+bones/3/rotation = Quaternion(-0.11103532, 0, 0, 0.99381655)
+bones/4/rotation = Quaternion(-0.022645276, -0.026731541, 0.66392535, 0.74697775)
+bones/5/rotation = Quaternion(0.11884192, -0.28471047, 0.5119665, 0.80169004)
+bones/6/rotation = Quaternion(-0.72026795, 0.49918106, 0.04735559, 0.479364)
+bones/14/rotation = Quaternion(-0.15383595, 0.14920762, -0.6800499, 0.7011446)
+bones/15/rotation = Quaternion(-0.35846916, 0.075488664, -0.48868883, 0.7918236)
+bones/16/rotation = Quaternion(-0.4463024, 0.033139985, 0.020516893, 0.894033)
+bones/17/rotation = Quaternion(-0.006544938, 0, 0, 0.9999786)
+bones/18/rotation = Quaternion(-0.03925982, 0, 0, 0.99922913)
+bones/19/rotation = Quaternion(0.1677649, 0.07742598, -0.18655655, 0.96491283)
+bones/20/rotation = Quaternion(-0.032189358, -0.08383763, -0.26432666, 0.96024305)
+bones/21/rotation = Quaternion(-0.0020851172, -0.030772127, -0.27295166, 0.9615333)
+bones/22/rotation = Quaternion(-0.1076216, 0.01706213, -0.25703785, 0.96023864)
+bones/23/rotation = Quaternion(0.006963573, -0.020125132, -0.79281557, 0.6090895)
+bones/24/position = Vector3(-0.0010000002, 0.064, -0.069)
+bones/24/rotation = Quaternion(-0.8876787, 0.20160198, 0.17722416, 0.37413225)
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=183630894]
+deterministic = true
