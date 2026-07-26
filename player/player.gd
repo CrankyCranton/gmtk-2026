@@ -68,6 +68,8 @@ var was_on_floor := false
 @onready var jump_from_ground: AudioStreamPlayer = $JumpFromGround
 @onready var jump_from_mid_air: AudioStreamPlayer = $JumpFromMidAir
 @onready var jump_from_wall: AudioStreamPlayer = $JumpFromWall
+@onready var knife_throw: AudioStreamPlayer = $KnifeThrow
+@onready var dagger_animator: AnimationPlayer = $DaggerAnimator
 
 
 func _ready() -> void:
@@ -244,6 +246,8 @@ func _input(event: InputEvent) -> void:
 		recoil_hook()
 
 	if event.is_action_pressed(&"dagger") and has_counter_remaining("ammo"):
+		knife_throw.play()
+		dagger_animator.play(&"throw")
 		const BULLET: PackedScene = preload("res://player/dagger/dagger.tscn")
 		var bullet: Dagger = BULLET.instantiate()
 		bullet.hit.connect(_on_dagger_hit)

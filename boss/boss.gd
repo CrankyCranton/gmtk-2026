@@ -54,24 +54,24 @@ var limitations: Array[Dictionary] = [
 var dialogues: Array[Array] = [
 	[
 		"You've come to file a complaint?",
-		"It seems you didnt read the fine print,
+		"It seems you didn't read the fine print,
 		 your contract cannot be broken.",
 	],
 	[
 		"Back again?",
-		"Seems like I need to enforce some more of your 
-		contracts restrictions."
+		"Seems like I need to enforce some more of your
+		contract's restrictions."
 	],
 	[
-		"I dont know why I even bother paying my imps when
-		 they cant even keep out nuisances like you"
+		"I don't know why I even bother paying my imps when
+		 they can't even keep out nuisances like you"
 	],
 	[
-		"I dont have time for this.",
+		"I don't have time for this.",
 		"Do you know how much paperwork comes with stealing mortal souls?"
 	],
 	[
-		"If not for the terms of our contract a much worse fate 
+		"If not for the terms of our contract, a much worse fate
 		would be awaiting those who interupt my work."
 	],
 	[
@@ -165,7 +165,7 @@ func say(line: String) -> void:
 	for char: String in line:
 		text_display.text += char
 		await get_tree().create_timer(type_delay).timeout
-	await get_tree().create_timer(hold_len_per_char * line.length()).timeout
+	await get_tree().create_timer(maxf(1.0, hold_len_per_char * line.length())).timeout
 	text_display.text = ""
 
 
@@ -179,9 +179,9 @@ func _on_body_entered(body: Player) -> void:
 
 	get_tree().paused = true
 	await get_tree().create_timer(0.5).timeout
-	create_tween().set_trans(Tween.TRANS_SINE).tween_property(
+	await create_tween().set_trans(Tween.TRANS_SINE).tween_property(
 			body.head, ^"global_basis",
-			Basis.looking_at(body.head.global_position.direction_to(face.global_position)), 1.0)
+			Basis.looking_at(body.head.global_position.direction_to(face.global_position)), 1.0).finished
 	if endless == false:
 		if dialogues.size() > current_index:
 			await dialogue(dialogues[current_index])
@@ -192,7 +192,7 @@ func _on_body_entered(body: Player) -> void:
 		await  dialogue(["Your time was-",str(EndlessTimer.passed_time)])
 	await create_tween().tween_property(fade, ^"modulate", Color.WHITE, 1.0).finished
 
-	
+
 	if endless == false:
 		if current_index >= limitations.size():
 			print("U WOOOOOOONNNNNN!!!!!!!!!!!!!!! (like, fr this time)")

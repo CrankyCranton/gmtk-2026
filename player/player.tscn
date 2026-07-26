@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://bgm3gnq3uqex8" path="res://assets/Sound Assets/jump_from_ground.wav" id="18_65viv"]
 [ext_resource type="AudioStream" uid="uid://3grj06bq68ea" path="res://assets/Sound Assets/jump_from_mid_air.wav" id="19_x7c3f"]
 [ext_resource type="AudioStream" uid="uid://b4fers086a672" path="res://assets/Sound Assets/jump_from_wall.wav" id="20_bjvpn"]
+[ext_resource type="AudioStream" uid="uid://bk7pdiu6d8h4f" path="res://assets/Sound Assets/floraphonic-movement-swipe-whoosh-3-186577.mp3" id="21_x7c3f"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qcud2"]
 radius = 0.1
@@ -113,6 +114,67 @@ streams_count = 2
 stream_0/stream = ExtResource("11_ebec5")
 stream_1/stream = ExtResource("12_yllr7")
 
+[sub_resource type="Animation" id="Animation_x7c3f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/HandR/Knife:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.02614677, -0.29885846)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/HandR/Knife:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5480449, -1.4403908, -1.7012053)]
+}
+
+[sub_resource type="Animation" id="Animation_bjvpn"]
+resource_name = "throw"
+length = 0.2334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/HandR/Knife:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.13333334, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.02614677, -0.29885846), Vector3(-0.103, -0.017, 0.042), Vector3(-0.103, -0.017, 0.042), Vector3(0.47, -0.026, -0.164), Vector3(0, -0.02614677, -0.29885846)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/HandR/Knife:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.13333334, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5480449, -1.4403908, -1.7012053), Vector3(1.5480449, -1.4403908, -2.4866035), Vector3(1.5480449, -1.4403908, -2.4866035), Vector3(1.548107, -1.9634954, -1.2950343), Vector3(1.5480449, -1.4403908, -1.7012053)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7qer"]
+_data = {
+&"RESET": SubResource("Animation_x7c3f"),
+&"throw": SubResource("Animation_bjvpn")
+}
+
 [node name="Player" type="CharacterBody3D" unique_id=561281273]
 collision_layer = 2
 collision_mask = 3
@@ -170,7 +232,7 @@ visible = false
 mesh = SubResource("SphereMesh_qcud2")
 
 [node name="Knife" type="MeshInstance3D" parent="Head/HandR" unique_id=985096992]
-transform = Transform3D(1.9318516, 0.51566833, -0.04511517, -0.045115154, -0.005916998, -1.9994826, -0.51566845, 1.9323695, 0.005916849, 0, -0.02614677, -0.29885846)
+transform = Transform3D(1.9318516, 0.5156683, -0.045112573, -0.045112543, -0.0059166574, -1.9994826, -0.5156682, 1.9323694, 0.0059165037, 0, -0.02614677, -0.29885846)
 mesh = ExtResource("6_g6k8r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213292192]
@@ -296,6 +358,12 @@ stream = ExtResource("19_x7c3f")
 
 [node name="JumpFromWall" type="AudioStreamPlayer" parent="." unique_id=1929391912]
 stream = ExtResource("20_bjvpn")
+
+[node name="KnifeThrow" type="AudioStreamPlayer" parent="." unique_id=1877451807]
+stream = ExtResource("21_x7c3f")
+
+[node name="DaggerAnimator" type="AnimationPlayer" parent="." unique_id=284841294]
+libraries/ = SubResource("AnimationLibrary_s7qer")
 
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

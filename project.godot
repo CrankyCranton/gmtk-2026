@@ -98,3 +98,4 @@ rendering_device/driver.windows="d3d12"
 anti_aliasing/quality/use_debanding=true
 environment/volumetric_fog/volume_size=16
 environment/volumetric_fog/volume_depth=16
+environment/defaults/default_clear_color=Color(0.11372549, 0.02745098, 0.12941177, 1)

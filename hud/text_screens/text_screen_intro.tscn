@@ -6,7 +6,7 @@
 
 [node name="Label" parent="Background/Contract/MarginContainer" parent_id_path=PackedInt32Array(1625415961) index="0" unique_id=1375706016]
 text = "
-A year ago you signed a contract granting you power, wealth and fame beyond compare for a great cost.
+A year ago, you signed a contract granting you power, wealth and fame beyond compare for a great cost.
 
 
-Now with your time counting down you have made your way back to the demons lair to correct your mistake before your soul is eternally foreit."
+Now with your time counting down, you have made your way back to the demon's lair to correct your mistake before your soul is eternally foreited."

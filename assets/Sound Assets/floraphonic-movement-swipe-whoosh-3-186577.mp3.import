@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bk7pdiu6d8h4f"
+path="res://.godot/imported/floraphonic-movement-swipe-whoosh-3-186577.mp3-8b7a0a9de91f8c19f93afeb73f3760fa.mp3str"
+
+[deps]
+
+source_file="res://assets/Sound Assets/floraphonic-movement-swipe-whoosh-3-186577.mp3"
+dest_files=["res://.godot/imported/floraphonic-movement-swipe-whoosh-3-186577.mp3-8b7a0a9de91f8c19f93afeb73f3760fa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
