@@ -21,6 +21,10 @@ window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="uid://f7fdh6hok2vj"
+
 [input]
 
 left={

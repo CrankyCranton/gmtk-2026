@@ -5,7 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_qcud2"]
 font_size = 64
-outline_size = 23
+outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ny516"]
