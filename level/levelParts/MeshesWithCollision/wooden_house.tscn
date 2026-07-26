@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d210qfultcvtb"]
 
-[ext_resource type="PackedScene" uid="uid://tnp4od1lx4i1" path="res://level/levelParts/Meshes/wood_house.tscn" id="1_thndx"]
+[ext_resource type="PackedScene" uid="uid://2qetlloxp5yx" path="res://level/levelParts/Meshes/WoodHouse.glb" id="1_thndx"]
+[ext_resource type="PackedScene" uid="uid://tnp4od1lx4i1" path="res://level/levelParts/Meshes/wood_house.tscn" id="2_aieql"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aieql"]
 size = Vector3(48.807617, 1, 25.415161)
@@ -9,6 +10,8 @@ size = Vector3(48.807617, 1, 25.415161)
 size = Vector3(41, 18.349548, 1)
 
 [node name="WoodenHouse" type="Node3D" unique_id=2051456091]
+
+[node name="WoodHouse" parent="." unique_id=600451289 instance=ExtResource("1_thndx")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=597206561]
 
@@ -24,4 +27,4 @@ shape = SubResource("BoxShape3D_42ije")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -11.164542, -11)
 shape = SubResource("BoxShape3D_42ije")
 
-[node name="WoodHouse2" parent="." unique_id=600451289 instance=ExtResource("1_thndx")]
+[node name="WoodHouse2" parent="." unique_id=1442969316 instance=ExtResource("2_aieql")]
