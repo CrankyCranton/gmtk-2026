@@ -11,6 +11,7 @@ const TYPE_ICONS: Dictionary[String, Texture2D] = {
 	"enemies": preload("uid://gqoq3ted3u7"),
 	"time": preload("uid://cu1ayho6x7j4w"),
 }
+var anim_enabled := true
 
 @onready var icon: TextureRect = $Icon
 @onready var counter: Label = $Counter
@@ -18,6 +19,8 @@ const TYPE_ICONS: Dictionary[String, Texture2D] = {
 
 
 func set_type(type: String) -> void:
+	if type == "time":
+		anim_enabled = false
 	if placeholder_text == null or icon == null:
 		await get_tree().process_frame
 	if TYPE_ICONS.has(type):
@@ -29,4 +32,12 @@ func set_type(type: String) -> void:
 func set_counter(count: int) -> void:
 	if counter == null:
 		await get_tree().process_frame
+	var old_text: String = counter.text
+	var was_init: bool = old_text == ""
 	counter.text = "∞" if count == -1 else str(count)
+	var was_change: bool = counter.text != old_text
+
+	if anim_enabled and was_change and not was_init:
+		var ability_countdown: AbilityCountdown = preload("uid://moijsxeq1d8n").instantiate()
+		add_child(ability_countdown)
+		ability_countdown.init(icon.texture, count)

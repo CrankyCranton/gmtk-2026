@@ -29,7 +29,8 @@ fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_qcud2"]
-font_size = 32
+font_size = 24
+font_color = Color(1, 1, 1, 0.1254902)
 
 [sub_resource type="Animation" id="Animation_g6k8r"]
 length = 0.001
@@ -178,12 +179,19 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -325.0
-offset_top = -45.0
+offset_left = -333.0
+offset_top = -53.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Right-click to grapple"
+text = "WASD to move
+Space to jump
+Shift to dash
+Left-click to attack
+Right-click to grapple"
 label_settings = SubResource("LabelSettings_qcud2")
+horizontal_alignment = 2
 
 [node name="TimerTick" type="Timer" parent="." unique_id=1573258086]
 autostart = true
