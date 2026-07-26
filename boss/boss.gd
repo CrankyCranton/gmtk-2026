@@ -9,32 +9,32 @@ var limitations: Array[Dictionary] = [
 
 	},
 	{
-		"time": 130,
+		"time": 140,
 	},
 	{
-		"time": 120,
+		"time": 130,
 		"health": 3
 	},
 	{
-		"time": 110,
+		"time": 120,
 		"health": 3,
 		"dashes" : 5
 	},
 	{
-		"time": 100,
+		"time": 110,
 		"health": 3,
 		"dashes" : 5,
 		"enemies" : 5
 	},
 	{
-		"time": 90,
+		"time": 100,
 		"health": 3,
 		"dashes" : 5,
 		"enemies" : 5,
 		"grappling_hooks": 3
 	},
 	{
-		"time": 80,
+		"time": 90,
 		"health": 3,
 		"dashes" : 5,
 		"enemies" : 5,
@@ -42,7 +42,7 @@ var limitations: Array[Dictionary] = [
 		"ammo": 7
 	},
 	{
-		"time": 70,
+		"time": 80,
 		"health": 3,
 		"dashes" : 5,
 		"enemies" : 5,
