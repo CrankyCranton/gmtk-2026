@@ -54,21 +54,25 @@ var limitations: Array[Dictionary] = [
 var dialogues: Array[Array] = [
 	[
 		"You've come to file a complaint?",
-		"It seems you didnt read the fine print, your contract cannot be broken.",
+		"It seems you didnt read the fine print,
+		 your contract cannot be broken.",
 	],
 	[
 		"Back again?",
-		"Seems like I need to enforce some more of your contracts restrictions."
+		"Seems like I need to enforce some more of your 
+		contracts restrictions."
 	],
 	[
-		"I dont know why I even bother paying my imps when they cant even keep out nuisances like you"
+		"I dont know why I even bother paying my imps when
+		 they cant even keep out nuisances like you"
 	],
 	[
 		"I dont have time for this.",
 		"Do you know how much paperwork comes with stealing mortal souls?"
 	],
 	[
-		"If not for the terms of our contract a much worse fate would be awaiting those who interupt my work."
+		"If not for the terms of our contract a much worse fate 
+		would be awaiting those who interupt my work."
 	],
 	[
 		"Again...",
@@ -79,7 +83,8 @@ var dialogues: Array[Array] = [
 	],
 	[
 		"This is too much work.",
-		"You can keep your pitifull soul if this is what it takes for you to stop pestering me.",
+		"You can keep your pitifull soul if this is what it takes
+		for you to stop pestering me.",
 		"Now get out before I change my mind."
 	]
 ]
