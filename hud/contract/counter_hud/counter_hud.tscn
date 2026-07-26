@@ -51,7 +51,6 @@ offset_left = -48.0
 offset_top = -48.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "50"
 label_settings = SubResource("LabelSettings_7picr")
 horizontal_alignment = 1
 vertical_alignment = 1
