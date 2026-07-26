@@ -12,6 +12,7 @@ const MAX_WALL_JUMPS: int = 9_999_999_999
 const MAX_AIR_JUMPS: int = 1
 const WALL_CAM_TILT := deg_to_rad(15.0)
 const CAM_TILT_SPEED: float = 10.0
+const FADE_TIME_START: int = 4
 
 var counters: Dictionary = {}
 # Only restores when the player hits the floor, not wall.
@@ -40,6 +41,8 @@ var canWallStick = false
 var grapple_tween: Tween
 var fall_depth: float
 var fall_fade_height: float = 20.0
+var timer_fade_length: float
+var fade_time_left := float(FADE_TIME_START)
 
 @onready var wallStickTimer = $WalstickTimer
 @onready var dash_timer = $DashCooldown
@@ -60,9 +63,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	fall_fade.modulate.a = remap(global_position.y - fall_depth, 0.0, fall_fade_height, 1.0, 0.0)
-	printt(fall_depth, global_position.y, global_position.y - fall_depth)
-	print("modulate: ", fall_fade.modulate.a)
+	if counters.has("time") and counters["time"] <= FADE_TIME_START:
+		fade_time_left -= delta
+
+	fall_fade.modulate.a = maxf(1.0 - fade_time_left / FADE_TIME_START,
+			remap(global_position.y - fall_depth, 0.0, fall_fade_height, 1.0, 0.0))
+
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	var y: float = velocity.y
 	var dash_speed_bonus = 1
