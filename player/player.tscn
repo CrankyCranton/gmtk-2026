@@ -220,6 +220,16 @@ color = Color(0.66, 0.2574, 0.2574, 0.5019608)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=153991065]
 libraries/ = SubResource("AnimationLibrary_rgyib")
 
+[node name="FallFade" type="ColorRect" parent="." unique_id=262408104]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12941177, 0.14509805, 0.16862746, 1)
+
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="WallRunCoyoteTimer" to="." method="_on_wall_run_coyote_timer_timeout"]

@@ -38,6 +38,8 @@ var can_dash = true
 var dash_speed: float = 40.0
 var canWallStick = false
 var grapple_tween: Tween
+var fall_depth: float
+var fall_fade_height: float = 20.0
 
 @onready var wallStickTimer = $WalstickTimer
 @onready var dash_timer = $DashCooldown
@@ -49,6 +51,7 @@ var grapple_tween: Tween
 @onready var hand_r: Marker3D = %HandR
 @onready var center: Marker3D = $Center
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var fall_fade: ColorRect = $FallFade
 
 
 func _ready() -> void:
@@ -57,6 +60,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	fall_fade.modulate.a = remap(global_position.y - fall_depth, 0.0, fall_fade_height, 1.0, 0.0)
+	printt(fall_depth, global_position.y, global_position.y - fall_depth)
+	print("modulate: ", fall_fade.modulate.a)
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	var y: float = velocity.y
 	var dash_speed_bonus = 1

@@ -13,9 +13,11 @@ var index: int = 0
 @onready var player: Player = $Player
 @onready var boss: Boss = $Boss
 @onready var contract: Contract = $Contract
+@onready var fall_zone_shape: CollisionShape3D = $FallZone/CollisionShape3D
 
 
 func _ready() -> void:
+	player.fall_depth = fall_zone_shape.global_position.y
 	player.died.connect(load_scene)
 	boss.annoyed.connect(load_scene)
 	player.counters_changed.connect(contract._on_player_counters_changed)

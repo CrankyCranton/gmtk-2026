@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://buhct2w01edag" path="res://assets/Boss - Goal/Boss.glb" id="2_nnfxe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqh86"]
-size = Vector3(27, 4, 24)
+size = Vector3(27, 2, 24)
 
 [sub_resource type="Gradient" id="Gradient_b105h"]
 offsets = PackedFloat32Array(0)
@@ -84,14 +84,13 @@ monitorable = false
 script = ExtResource("1_b105h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1622836383]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 32.5, -23)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 31.5, -23)
 shape = SubResource("BoxShape3D_hqh86")
 
-[node name="Text" type="Label3D" parent="." unique_id=1667436805]
+[node name="TextDisplay" type="Label3D" parent="." unique_id=1667436805]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.288971, 58, -17)
 pixel_size = 0.01
 billboard = 1
-text = "This is a test."
 font_size = 256
 outline_size = 64
 
@@ -202,6 +201,16 @@ shape = SubResource("ConvexPolygonShape3D_2802n")
 
 [node name="Face" type="Marker3D" parent="." unique_id=578735704]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 50, -11)
+
+[node name="Fade" type="ColorRect" parent="." unique_id=1819677094]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11372549, 0.02745098, 0.12941177, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 
