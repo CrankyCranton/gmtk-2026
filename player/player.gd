@@ -71,6 +71,7 @@ var was_on_floor := false
 
 
 func _ready() -> void:
+	EndlessTimer.is_running = true
 	cursor.target_position.z = -grapple_range
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bjd0scnrh7xvx"]
+
+[ext_resource type="PackedScene" uid="uid://cdvft7446tu26" path="res://hud/text_screen.tscn" id="1_q2a1n"]
+[ext_resource type="Script" uid="uid://b1niaf77v5c0n" path="res://text_screen_end.gd" id="2_qwjdx"]
+
+[node name="TextScreenEnd" unique_id=839307810 instance=ExtResource("1_q2a1n")]
+script = ExtResource("2_qwjdx")
+
+[node name="Label" parent="Background/Contract/MarginContainer" parent_id_path=PackedInt32Array(1625415961) index="0" unique_id=1375706016]
+text = "End Text
+
+
+You can continue to play in endless mode."

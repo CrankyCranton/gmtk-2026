@@ -17,6 +17,7 @@ var index: int = 0
 var easy_mode = false
 
 func _ready() -> void:
+	EndlessTimer.level = self
 	player.fall_depth = fall_zone_shape.global_position.y
 	player.died.connect(load_scene)
 	boss.annoyed.connect(load_scene)
@@ -37,6 +38,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("1"):
 		easy_mode = !easy_mode
 
+
 func load_scene() -> void:
 	get_tree().paused = true
 	await get_tree().create_timer(1.5).timeout
@@ -49,6 +51,7 @@ func load_scene() -> void:
 
 	next_level.boss.current_index = boss.current_index
 	next_level.boss.update_health_bar()
-
-	get_tree().current_scene.queue_free()
-	get_tree().current_scene = next_level
+	next_level.boss.endless = boss.endless
+	if not get_tree().current_scene == null:
+		get_tree().current_scene.queue_free()
+		get_tree().current_scene = next_level
