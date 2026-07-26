@@ -14,7 +14,7 @@ var index: int = 0
 @onready var boss: Boss = $Boss
 @onready var contract: Contract = $Contract
 @onready var fall_zone_shape: CollisionShape3D = $FallZone/CollisionShape3D
-
+var easy_mode = false
 
 func _ready() -> void:
 	player.fall_depth = fall_zone_shape.global_position.y
@@ -22,8 +22,10 @@ func _ready() -> void:
 	boss.annoyed.connect(load_scene)
 	player.counters_changed.connect(contract._on_player_counters_changed)
 	player.counters_initialized.connect(contract._on_player_counters_initialized)
-
-	player.counters = boss.limitations[index].duplicate()
+	if easy_mode == false:
+		player.counters = boss.limitations[index].duplicate()
+	else:
+		player.counters = boss.easy_limitations[index].duplicate()
 	player.counters_initialized.emit(player.counters.duplicate())
 
 	if TEXT_SCREENS.size() <= index:
@@ -31,6 +33,9 @@ func _ready() -> void:
 	else:
 		add_child(TEXT_SCREENS[index].instantiate())
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("1"):
+		easy_mode = !easy_mode
 
 func load_scene() -> void:
 	get_tree().paused = true
@@ -38,6 +43,7 @@ func load_scene() -> void:
 	get_tree().paused = false
 
 	var next_level: Level = load(scene_file_path).instantiate()
+	next_level.easy_mode = easy_mode
 	next_level.index = boss.current_index
 	get_node(^"/root").add_child(next_level)
 

@@ -9,16 +9,46 @@ var limitations: Array[Dictionary] = [
 
 	},
 	{
-		"health": 3,
+		"time": 130,
 	},
 	{
-		"health": 3,
-		"ammo": 50,
-		"air_jumps": 25,
-		"dashes": 5,
-		"grappling_hooks": 5,
 		"time": 120,
-		"enemies": 2,
+		"health": 3
+	},
+	{
+		"time": 110,
+		"health": 3,
+		"dashes" : 5
+	},
+	{
+		"time": 100,
+		"health": 3,
+		"dashes" : 5,
+		"enemies" : 5
+	},
+	{
+		"time": 90,
+		"health": 3,
+		"dashes" : 5,
+		"enemies" : 5,
+		"grappling_hooks": 3
+	},
+	{
+		"time": 80,
+		"health": 3,
+		"dashes" : 5,
+		"enemies" : 5,
+		"grappling_hooks": 3,
+		"ammo": 7
+	},
+	{
+		"time": 70,
+		"health": 3,
+		"dashes" : 5,
+		"enemies" : 5,
+		"grappling_hooks": 3,
+		"ammo": 7,
+		"air_jumps" : 14
 	},
 ]
 var dialogues: Array[Array] = [
@@ -36,6 +66,52 @@ var hold_len_per_char: float = 0.05
 @onready var text_display: Label3D = $TextDisplay
 @onready var fade: ColorRect = $Fade
 
+var easy_limitations: Array[Dictionary] = [
+	{
+
+	},
+	{
+		"time": 180,
+	},
+	{
+		"time": 170,
+		"health": 5
+	},
+	{
+		"time": 160,
+		"health": 5,
+		"dashes" : 7
+	},
+	{
+		"time": 150,
+		"health": 5,
+		"dashes" : 6,
+		"enemies" : 5
+	},
+	{
+		"time": 140,
+		"health": 5,
+		"dashes" : 6,
+		"enemies" : 4,
+		"grappling_hooks": 5
+	},
+	{
+		"time": 130,
+		"health": 5,
+		"dashes" : 6,
+		"enemies" : 4,
+		"grappling_hooks": 5,
+		"ammo": 10
+	},
+	{
+		"time": 120,
+		"health": 5,
+		"dashes" : 6,
+		"enemies" : 4,
+		"grappling_hooks": 5,
+		"ammo": 10,
+		"air_jumps" : 20
+	}]
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
