@@ -5,6 +5,8 @@ class_name EnemyBullet extends Area3D
 var speed: float = 40.0
 var gravity_scale: float = 1.0
 
+@onready var arrow_shoot: AudioStreamPlayer3D = $ArrowShoot
+
 
 func _physics_process(delta: float) -> void:
 	global_position += -global_basis.z * speed * delta
@@ -13,6 +15,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	arrow_shoot.reparent(get_tree().root)
 	if body is Player:
 		body.tick_counter("health")
 	queue_free()

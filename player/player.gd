@@ -43,6 +43,7 @@ var fall_depth: float
 var fall_fade_height: float = 20.0
 var timer_fade_length: float
 var fade_time_left := float(FADE_TIME_START)
+var was_on_floor := false
 
 @onready var wallStickTimer = $WalstickTimer
 @onready var dash_timer = $DashCooldown
@@ -55,6 +56,18 @@ var fade_time_left := float(FADE_TIME_START)
 @onready var center: Marker3D = $Center
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fall_fade: ColorRect = $FallFade
+@onready var grappling_extend: AudioStreamPlayer = $GrapplingExtend
+@onready var grappling_retract: AudioStreamPlayer = $GrapplingRetract
+@onready var grapple_hit: AudioStreamPlayer = $GrappleHit
+@onready var hurt: AudioStreamPlayer = $Hurt
+@onready var dash: AudioStreamPlayer = $Dash
+@onready var footsteps_ground: AudioStreamPlayer = $FootstepsGround
+@onready var footsteps_wall: AudioStreamPlayer = $FootstepsWall
+@onready var landing: AudioStreamPlayer = $Landing
+@onready var player_death: AudioStreamPlayer = $PlayerDeath
+@onready var jump_from_ground: AudioStreamPlayer = $JumpFromGround
+@onready var jump_from_mid_air: AudioStreamPlayer = $JumpFromMidAir
+@onready var jump_from_wall: AudioStreamPlayer = $JumpFromWall
 
 
 func _ready() -> void:
@@ -70,6 +83,19 @@ func _physics_process(delta: float) -> void:
 			remap(global_position.y - fall_depth, 0.0, fall_fade_height, 1.0, 0.0))
 
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
+	if input != Vector2.ZERO and is_on_floor() and not is_on_wall():
+		if not footsteps_ground.playing:
+			footsteps_ground.play()
+	else:
+		footsteps_ground.stop()
+
+	const WALLRUN_SOUND_SPEED: float = 10.0
+	if input != Vector2.ZERO and is_on_wall() and Utils.vec3_to_2(velocity).length() > WALLRUN_SOUND_SPEED:
+		if not footsteps_wall.playing:
+			footsteps_wall.play()
+	else:
+		footsteps_wall.stop()
+
 	var y: float = velocity.y
 	var dash_speed_bonus = 1
 	var current_speed: float = wallrun_speed * dash_speed_bonus if is_on_wall() else speed * dash_speed_bonus
@@ -92,6 +118,7 @@ func _physics_process(delta: float) -> void:
 	# a platform without jumping.
 	if can_dash == true:
 		if Input.is_action_just_pressed("dash") and has_counter_remaining("dashes"):
+			dash.play()
 			tick_counter("dashes")
 			can_dash = false
 			air_jumps_left = 1
@@ -109,14 +136,18 @@ func _physics_process(delta: float) -> void:
 	if coyoteJump == true:
 		if Input.is_action_just_pressed(&"jump"):
 			velocity.y = jump_force
+			jump_from_ground.play()
 	elif air_jumps_left > 0 and has_counter_remaining("air_jumps") and not wallRunCoyoteJump == true:
 		if Input.is_action_just_pressed(&"jump"):
+			jump_from_mid_air.play()
 			velocity.y = jump_force
 			coyoteJump = false
 			tick_counter("air_jumps")
 			air_jumps_left -= 1
 
 	if is_on_floor():
+		if not was_on_floor:
+			landing.play(0.5)
 		coyoteJump = true
 		wall_jumps_left = MAX_WALL_JUMPS
 		air_jumps_left = MAX_AIR_JUMPS
@@ -153,6 +184,7 @@ func _physics_process(delta: float) -> void:
 
 	if (Input.is_action_just_pressed(&"jump") and wall_jumps_left > 0 and wallRunCoyoteJump == true
 			and has_counter_remaining("wall_jumps")):
+		jump_from_wall.play()
 		velocity += wall_normal * wall_jump_force
 		wall_jumps_left -= 1
 		air_jumps_left = 1
@@ -176,7 +208,10 @@ func _physics_process(delta: float) -> void:
 		velocity += global_position.direction_to(grapple_point) * grapple_speed * delta
 		rope_origin.look_at(grapple_point)
 		rope_origin.scale.z = rope_origin.global_position.distance_to(grapple_point) - 0.2
+
+	was_on_floor = is_on_floor()
 	move_and_slide()
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -186,7 +221,9 @@ func _input(event: InputEvent) -> void:
 		rotation.y -= mouse_vel.x
 
 	if event.is_action_pressed(&"grappling_hook") and has_counter_remaining("grappling_hooks"):
+		grappling_extend.play()
 		if cursor.is_colliding():
+			grapple_hit.play()
 			grapple_point = (cursor.get_collision_point() if cursor.is_colliding()
 					else cursor.to_global(cursor.target_position))
 			tick_counter("grappling_hooks")
@@ -221,6 +258,7 @@ func _input(event: InputEvent) -> void:
 
 
 func recoil_hook() -> void:
+	grappling_retract.play()
 	grapple_tween.tween_property(rope_origin, ^"scale:z", 0.001, 0.3)
 	grapple_tween.tween_property(rope_origin, ^"rotation", Vector3.ZERO, 0.1)
 	await grapple_tween.finished
@@ -229,6 +267,7 @@ func recoil_hook() -> void:
 
 func tick_counter(counter: String) -> void:
 	if counter == "health":
+		hurt.play()
 		animation_player.play(&"hit")
 	if (not counters.has(counter)) or counters[counter] <= 0:
 		return
@@ -236,7 +275,13 @@ func tick_counter(counter: String) -> void:
 	counters_changed.emit(counters.duplicate())
 	if (counters.has("time") and counters["time"] == 0) \
 			or (counters.has("health") and counters["health"] == 0):
-		died.emit()
+		die()
+
+
+func die() -> void:
+	player_death.play()
+	player_death.reparent(get_tree().root)
+	died.emit()
 
 
 func has_counter_remaining(counter: String) -> bool:

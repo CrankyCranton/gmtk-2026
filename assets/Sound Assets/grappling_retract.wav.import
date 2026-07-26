@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tpg3vlpp1uoq"
+path="res://.godot/imported/grappling_retract.wav-1f3c120d2c31473d0e6f3b3cef513956.sample"
+
+[deps]
+
+source_file="res://assets/Sound Assets/grappling_retract.wav"
+dest_files=["res://.godot/imported/grappling_retract.wav-1f3c120d2c31473d0e6f3b3cef513956.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

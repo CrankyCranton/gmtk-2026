@@ -5,6 +5,7 @@ var player: Player = null
 
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var barrel: Marker3D = $Barrel
+@onready var enemy_death: AudioStreamPlayer3D = $EnemyDeath
 
 
 func _physics_process(_delta: float) -> void:
@@ -15,6 +16,12 @@ func _physics_process(_delta: float) -> void:
 		# Rotated because X is 0 rotation in 2D
 		var angle: float = flat_vec.angle() + deg_to_rad(90.0)
 		rotation.y = angle
+
+
+func die() -> void:
+	enemy_death.play()
+	enemy_death.reparent(get_tree().root)
+	queue_free()
 
 
 func _on_detection_zone_body_entered(body: Node3D) -> void:

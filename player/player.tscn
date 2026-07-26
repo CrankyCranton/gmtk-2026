@@ -7,6 +7,19 @@
 [ext_resource type="ArrayMesh" uid="uid://cc5sb4iumretb" path="res://assets/Player/Equipment/Rope.obj" id="4_yw30f"]
 [ext_resource type="ArrayMesh" uid="uid://csgreitc58q22" path="res://assets/Player/Equipment/Knife.obj" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://b80oqrmvc7c3d" path="res://player/label.gd" id="7_boad6"]
+[ext_resource type="AudioStream" uid="uid://coumdb4x5jmyf" path="res://assets/Sound Assets/grappling_extend.wav" id="8_8t03j"]
+[ext_resource type="AudioStream" uid="uid://tpg3vlpp1uoq" path="res://assets/Sound Assets/grappling_retract.wav" id="9_2ieo8"]
+[ext_resource type="AudioStream" uid="uid://bie83i1hx07rd" path="res://assets/Sound Assets/grapple_hit.wav" id="10_ebec5"]
+[ext_resource type="AudioStream" uid="uid://bb7cwqupulek1" path="res://assets/Sound Assets/hurt.wav" id="11_ebec5"]
+[ext_resource type="AudioStream" uid="uid://dpb18i52377w0" path="res://assets/Sound Assets/hurt_2.wav" id="12_yllr7"]
+[ext_resource type="AudioStream" uid="uid://h5fl5i8pxn1u" path="res://assets/Sound Assets/dash.wav" id="13_wodsf"]
+[ext_resource type="AudioStream" uid="uid://n2b2p4f8yqgq" path="res://assets/Sound Assets/footsteps_ground.wav" id="14_32hag"]
+[ext_resource type="AudioStream" uid="uid://cmym7l8lwrsos" path="res://assets/Sound Assets/footsteps_wall.wav" id="15_tqiix"]
+[ext_resource type="AudioStream" uid="uid://bibn5hm6gy4jf" path="res://assets/Sound Assets/landing.wav" id="16_32hag"]
+[ext_resource type="AudioStream" uid="uid://cehnv4ujtojid" path="res://assets/Sound Assets/player_death.wav" id="17_tqiix"]
+[ext_resource type="AudioStream" uid="uid://bgm3gnq3uqex8" path="res://assets/Sound Assets/jump_from_ground.wav" id="18_65viv"]
+[ext_resource type="AudioStream" uid="uid://3grj06bq68ea" path="res://assets/Sound Assets/jump_from_mid_air.wav" id="19_x7c3f"]
+[ext_resource type="AudioStream" uid="uid://b4fers086a672" path="res://assets/Sound Assets/jump_from_wall.wav" id="20_bjvpn"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qcud2"]
 radius = 0.1
@@ -93,6 +106,12 @@ _data = {
 &"RESET": SubResource("Animation_g6k8r"),
 &"hit": SubResource("Animation_boad6")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qcud2"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("11_ebec5")
+stream_1/stream = ExtResource("12_yllr7")
 
 [node name="Player" type="CharacterBody3D" unique_id=561281273]
 collision_layer = 2
@@ -240,6 +259,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12941177, 0.14509805, 0.16862746, 1)
+
+[node name="GrapplingExtend" type="AudioStreamPlayer" parent="." unique_id=1769029532]
+stream = ExtResource("8_8t03j")
+
+[node name="GrapplingRetract" type="AudioStreamPlayer" parent="." unique_id=644273869]
+stream = ExtResource("9_2ieo8")
+
+[node name="GrappleHit" type="AudioStreamPlayer" parent="." unique_id=1836660029]
+stream = ExtResource("10_ebec5")
+
+[node name="Hurt" type="AudioStreamPlayer" parent="." unique_id=554235108]
+stream = SubResource("AudioStreamRandomizer_qcud2")
+
+[node name="Dash" type="AudioStreamPlayer" parent="." unique_id=1487026496]
+stream = ExtResource("13_wodsf")
+
+[node name="FootstepsGround" type="AudioStreamPlayer" parent="." unique_id=1955140312]
+stream = ExtResource("14_32hag")
+
+[node name="FootstepsWall" type="AudioStreamPlayer" parent="." unique_id=1597552004]
+stream = ExtResource("15_tqiix")
+
+[node name="Landing" type="AudioStreamPlayer" parent="." unique_id=733688780]
+stream = ExtResource("16_32hag")
+
+[node name="PlayerDeath" type="AudioStreamPlayer" parent="." unique_id=1757581327]
+process_mode = 3
+stream = ExtResource("17_tqiix")
+
+[node name="JumpFromGround" type="AudioStreamPlayer" parent="." unique_id=229737090]
+stream = ExtResource("18_65viv")
+
+[node name="JumpFromMidAir" type="AudioStreamPlayer" parent="." unique_id=1606513504]
+stream = ExtResource("19_x7c3f")
+
+[node name="JumpFromWall" type="AudioStreamPlayer" parent="." unique_id=1929391912]
+stream = ExtResource("20_bjvpn")
 
 [connection signal="timeout" from="TimerTick" to="." method="_on_timer_tick_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3grj06bq68ea"
+path="res://.godot/imported/jump_from_mid_air.wav-a119a8e3099cb0c82d37ea7d9289e048.sample"
+
+[deps]
+
+source_file="res://assets/Sound Assets/jump_from_mid_air.wav"
+dest_files=["res://.godot/imported/jump_from_mid_air.wav-a119a8e3099cb0c82d37ea7d9289e048.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

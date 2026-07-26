@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ci5xk552r6xkf" path="res://enemy/enemy_bullet/enemy_bullet.gd" id="1_n51l6"]
 [ext_resource type="ArrayMesh" uid="uid://dlpinemhsf0of" path="res://assets/Imp - Enemy/Arrow.obj" id="2_0s0xg"]
+[ext_resource type="AudioStream" uid="uid://cjm3qsn1ebixc" path="res://assets/Sound Assets/arrow_shoot.mp3" id="3_4lkoo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n51l6"]
 radius = 0.1
@@ -95,5 +96,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4lkoo")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Arrow" unique_id=1416874585]
 mesh = SubResource("ArrayMesh_hr16e")
 surface_material_override/0 = SubResource("StandardMaterial3D_4lkoo")
+
+[node name="ArrowShoot" type="AudioStreamPlayer3D" parent="." unique_id=486402825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029956937, 1.1920929e-07, -0.04460025)
+stream = ExtResource("3_4lkoo")
+autoplay = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

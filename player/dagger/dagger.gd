@@ -25,8 +25,8 @@ func _on_body_entered(_body: Node3D) -> void:
 	queue_free()
 
 
-func _on_area_entered(area: Area3D) -> void:
-	area.queue_free()
+func _on_area_entered(area: Enemy) -> void:
+	area.die()
 	var instance_particles = death_particle.instantiate()
 	instance_particles.position = global_position
 	instance_particles.emitting = true

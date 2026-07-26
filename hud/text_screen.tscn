@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cf1ufptkjekku" path="res://hud/text_screen.gd" id="1_ttwpe"]
 [ext_resource type="Texture2D" uid="uid://cxqxu76gwppfn" path="res://assets/UI/contract.png" id="2_278ru"]
+[ext_resource type="AudioStream" uid="uid://b4af1t4dk30si" path="res://assets/Sound Assets/page_turn.wav" id="3_polpb"]
 
 [sub_resource type="Gradient" id="Gradient_278ru"]
 interpolation_mode = 2
@@ -167,3 +168,7 @@ color = Color(0.11372549, 0.02745098, 0.12941177, 1)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1951254236]
 libraries/ = SubResource("AnimationLibrary_htkv2")
 autoplay = &"fade"
+
+[node name="PageTurn" type="AudioStreamPlayer" parent="." unique_id=1459280399]
+stream = ExtResource("3_polpb")
+autoplay = true
