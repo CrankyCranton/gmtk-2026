@@ -40,13 +40,19 @@ func _input(event: InputEvent) -> void:
 
 
 func load_scene() -> void:
+	EndlessTimer.is_running = false
+	EndlessTimer.passed_time = 0.0
+	EndlessTimer.is_running = true
+	EndlessTimer.start_time = Time.get_ticks_msec() - (EndlessTimer.passed_time * 1000.0)
 	get_tree().paused = true
 	await get_tree().create_timer(1.5).timeout
 	get_tree().paused = false
 
 	var next_level: Level = load(scene_file_path).instantiate()
 	next_level.easy_mode = easy_mode
-	next_level.index = boss.current_index
+	if not boss.endless == true:
+		next_level.index = boss.current_index
+	else: next_level.index = 7
 	get_node(^"/root").add_child(next_level)
 
 	next_level.boss.current_index = boss.current_index
