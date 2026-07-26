@@ -149,7 +149,6 @@ billboard = 1
 no_depth_test = true
 render_priority = 2
 outline_render_priority = 1
-text = "This is a test"
 font_size = 256
 outline_size = 64
 
