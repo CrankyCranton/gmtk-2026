@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://buhct2w01edag" path="res://assets/Boss - Goal/Boss.glb" id="2_nnfxe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqh86"]
-size = Vector3(27, 4, 24)
+size = Vector3(68.9444, 49.60914, 59.052917)
 
 [sub_resource type="Gradient" id="Gradient_b105h"]
 offsets = PackedFloat32Array(0)
@@ -84,7 +84,7 @@ monitorable = false
 script = ExtResource("1_b105h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1622836383]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 32.5, -23)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5843811, 23.27113, -40.52646)
 shape = SubResource("BoxShape3D_hqh86")
 
 [node name="Text" type="Label3D" parent="." unique_id=1667436805]
@@ -113,11 +113,11 @@ texture_progress = SubResource("GradientTexture2D_yy71b")
 [node name="blockbench_export" parent="." unique_id=391233277 instance=ExtResource("2_nnfxe")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -1, 0, 1)
 
-[node name="CollisionShape3D15" type="CollisionShape3D" parent="blockbench_export/Desk" parent_id_path=PackedInt32Array(391233277, 1390818651) index="15" unique_id=1956597546]
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="blockbench_export/Desk" parent_id_path=PackedInt32Array(391233277, 1564295751) index="15" unique_id=1956597546]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81, -0.492)
 shape = SubResource("ConvexPolygonShape3D_mcvhe")
 
-[node name="Skeleton3D" parent="blockbench_export/armature" parent_id_path=PackedInt32Array(391233277, 2044120386) index="0" unique_id=999699514]
+[node name="Skeleton3D" parent="blockbench_export/armature" parent_id_path=PackedInt32Array(391233277, 430262057) index="0" unique_id=1525953349]
 bones/0/position = Vector3(0, 0.573, -0.031)
 bones/1/rotation = Quaternion(-0.043619387, 0, 0, 0.99904823)
 bones/2/rotation = Quaternion(-0.10886688, 0, 0, 0.99405634)
@@ -138,7 +138,7 @@ bones/23/rotation = Quaternion(0.006963573, -0.020125132, -0.79281557, 0.6090895
 bones/24/position = Vector3(-0.0010000002, 0.064, -0.069)
 bones/24/rotation = Quaternion(-0.8876787, 0.20160198, 0.17722416, 0.37413225)
 
-[node name="AnimationPlayer" parent="blockbench_export" index="2" unique_id=758386291]
+[node name="AnimationPlayer" parent="blockbench_export" index="2" unique_id=183630894]
 autoplay = &"Idle"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1385462289]
