@@ -1,6 +1,6 @@
 class_name Boss extends Area3D
 
-
+var endless = false
 signal annoyed
 
 # TODO: fill limitations
@@ -53,9 +53,35 @@ var limitations: Array[Dictionary] = [
 ]
 var dialogues: Array[Array] = [
 	[
-		"Hello. This is a test.",
-		"Here's line 2 of the dialogue.",
+		"You've come to file a complaint?",
+		"It seems you didnt read the fine print, your contract cannot be broken.",
 	],
+	[
+		"Back again?",
+		"Seems like I need to enforce some more of your contracts restrictions."
+	],
+	[
+		"I dont know why I even bother paying my imps when they cant even keep out nuisances like you"
+	],
+	[
+		"I dont have time for this.",
+		"Do you know how much paperwork comes with stealing mortal souls?"
+	],
+	[
+		"If not for the terms of our contract a much worse fate would be awaiting those who interupt my work."
+	],
+	[
+		"Again...",
+		"How many times do I need to tell you that I dont do refunds?"
+	],
+	[
+		"Begone!"
+	],
+	[
+		"This is too much work.",
+		"You can keep your pitifull soul if this is what it takes for you to stop pestering me.",
+		"Now get out before I change my mind."
+	]
 ]
 var current_index: int = 0
 var type_delay: float = 0.03
@@ -139,6 +165,7 @@ func say(line: String) -> void:
 
 
 func _on_body_entered(body: Player) -> void:
+	EndlessTimer.is_running = false
 	if body.counters.has("enemies") and body.counters["enemies"] > 0:
 		print("No enough enemies")
 		say("As per the contract, you must kill %s more imps before you may speak to me."
@@ -150,18 +177,30 @@ func _on_body_entered(body: Player) -> void:
 	create_tween().set_trans(Tween.TRANS_SINE).tween_property(
 			body.head, ^"global_basis",
 			Basis.looking_at(body.head.global_position.direction_to(face.global_position)), 1.0)
-
-	if dialogues.size() > current_index:
-		await dialogue(dialogues[current_index])
+	if endless == false:
+		if dialogues.size() > current_index:
+			await dialogue(dialogues[current_index])
+		else:
+			printerr("No dialogue for index ", current_index)
+		current_index += 1
 	else:
-		printerr("No dialogue for index ", current_index)
+		await  dialogue(["Your time was-",str(EndlessTimer.passed_time)])
 	await create_tween().tween_property(fade, ^"modulate", Color.WHITE, 1.0).finished
 
-	current_index += 1
-	if current_index >= limitations.size():
-		print("U WOOOOOOONNNNNN!!!!!!!!!!!!!!! (like, fr this time)")
-		get_tree().change_scene_to_packed(Level.TEXT_SCREENS.back())
+	
+	if endless == false:
+		if current_index >= limitations.size():
+			print("U WOOOOOOONNNNNN!!!!!!!!!!!!!!! (like, fr this time)")
+			endless = true
+			get_tree().change_scene_to_packed(load("res://level/text_screen_end.tscn"))
+			#get_tree().change_scene_to_packed(Level.TEXT_SCREENS.back())
+		else:
+			print("U won!")
+			update_health_bar()
+			annoyed.emit()
 	else:
-		print("U won!")
-		update_health_bar()
+		EndlessTimer.is_running = false
+		EndlessTimer.passed_time = 0.0
+		EndlessTimer.is_running = true
+		EndlessTimer.start_time = Time.get_ticks_msec() - (EndlessTimer.passed_time * 1000.0)
 		annoyed.emit()

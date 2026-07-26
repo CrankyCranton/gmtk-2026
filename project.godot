@@ -15,6 +15,10 @@ run/main_scene="uid://d4h73k2obno77"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EndlessTimer="*uid://b5j2w1dg4b23q"
+
 [display]
 
 window/size/mode=3

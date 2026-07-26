@@ -58,6 +58,7 @@ var fade_time_left := float(FADE_TIME_START)
 
 
 func _ready() -> void:
+	EndlessTimer.is_running = true
 	cursor.target_position.z = -grapple_range
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
