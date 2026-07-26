@@ -24,30 +24,30 @@ var limitations: Array[Dictionary] = [
 		"time": 110,
 		"health": 3,
 		"dashes" : 5,
-		"enemies" : 5
+		"enemies" : 7
 	},
 	{
 		"time": 100,
 		"health": 3,
 		"dashes" : 5,
-		"enemies" : 5,
+		"enemies" : 7,
 		"grappling_hooks": 3
 	},
 	{
 		"time": 90,
 		"health": 3,
 		"dashes" : 5,
-		"enemies" : 5,
+		"enemies" : 7,
 		"grappling_hooks": 3,
-		"ammo": 7
+		"ammo": 10
 	},
 	{
 		"time": 80,
 		"health": 3,
 		"dashes" : 5,
-		"enemies" : 5,
+		"enemies" : 7,
 		"grappling_hooks": 3,
-		"ammo": 7,
+		"ammo": 10,
 		"air_jumps" : 14
 	},
 ]
@@ -117,7 +117,7 @@ var easy_limitations: Array[Dictionary] = [
 		"time": 150,
 		"health": 5,
 		"dashes" : 6,
-		"enemies" : 5
+		"enemies" : 4
 	},
 	{
 		"time": 140,
